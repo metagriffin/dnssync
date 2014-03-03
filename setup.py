@@ -43,6 +43,8 @@ dependencies = [
   'powerdnsclient       >= 1.0',
   'dnspython            >= 1.11.1',
   'six                  >= 1.5.2',
+  'blessings            >= 1.5.1',
+  'aadict               >= 0.2.1',
 ]
 
 entrypoints = {
