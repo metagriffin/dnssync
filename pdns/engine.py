@@ -22,7 +22,6 @@
 import sys
 import six
 import dns.zone
-import powerdnsclient
 import difflib
 import re
 import blessings
@@ -31,6 +30,7 @@ from aadict import aadict
 import logging
 
 from .i18n import _
+from . import protocol
 
 #------------------------------------------------------------------------------
 
@@ -255,7 +255,7 @@ def upload(ctxt):
 
 #------------------------------------------------------------------------------
 def run(command, apikey, domain, zonefile):
-  client = powerdnsclient.Client(apikey)
+  client = protocol.Client(apikey)
   zoneid = None
   domain = absdom(domain)
   for zone in client.service.listZones().Zones.Zone:

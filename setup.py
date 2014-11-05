@@ -40,7 +40,6 @@ test_dependencies = [
 dependencies = [
   'distribute           >= 0.6.24',
   'iniherit             >= 0.1.7',
-  'powerdnsclient       >= 1.0',
   'dnspython            >= 1.11.1',
   'six                  >= 1.5.2',
   'blessings            >= 1.5.1',
