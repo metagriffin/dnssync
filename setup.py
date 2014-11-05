@@ -41,9 +41,10 @@ dependencies = [
   'distribute           >= 0.6.24',
   'iniherit             >= 0.1.7',
   'dnspython            >= 1.11.1',
-  'six                  >= 1.5.2',
+  'six                  >= 1.6.1',
   'blessings            >= 1.5.1',
   'aadict               >= 0.2.1',
+  'suds                 >= 0.4',
 ]
 
 entrypoints = {
