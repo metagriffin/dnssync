@@ -56,7 +56,8 @@ dnsname_re = re.compile(
   (?:
     (?![0-9]+\.)                # sld name components cannot be numbers-only
     (?!-)                       # name components cannot start with a dash
-    [a-zA-Z0-9-]{1,63}          # at most 63 alpha-numeric + dash characters
+    [a-zA-Z0-9_]                # first character alpha-numeric + underscore
+    [a-zA-Z0-9-]{0,62}          # at most 62 alpha-numeric + dash characters
     (?<!-)                      # name components cannot end with a dash
     \.
   )+
