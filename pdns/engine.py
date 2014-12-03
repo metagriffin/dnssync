@@ -22,6 +22,7 @@
 import sys
 import six
 import dns.zone
+import dns.rdata
 import difflib
 import re
 import blessings
@@ -88,6 +89,15 @@ def reldom(domain):
   return domain
 
 #------------------------------------------------------------------------------
+def escapeContent(text):
+  if not text:
+    return text
+  # todo: `dns.rdata._escapify` should really be doing this detection for me...
+  if ';' not in text and ' ' not in text and '"' not in text:
+    return text
+  return '"' + dns.rdata._escapify(text) + '"'
+
+#------------------------------------------------------------------------------
 def downloadZone(ctxt):
   # TODO: i should really be building this from dns.zone.* calls...
   #       but dnspython is *so* unintuitive! ugh.
@@ -96,6 +106,9 @@ def downloadZone(ctxt):
     fmt = RECORDFMTS.get(record.Type, RECORDFMTS.get('*'))
     record.Content = ' '.join([
       absdom(comp) for comp in record.Content.split()])
+    # todo: is TXT really the only record type?...
+    if record.Type == 'TXT':
+      record.Content = escapeContent(record.Content)
     lines.append(fmt.format(
       name     = absdom(record.Name),
       ttl      = record.TimeToLive,
