@@ -207,6 +207,10 @@ def updateRecord(ctxt, records, record):
     update.Priority = record.rdata.preference
     update.Content  = record.rdata.exchange.to_text()
 
+  if update.Type == 'TXT':
+    # todo: is this how they should all be done?...
+    update.Content = ' '.join(record.rdata.strings)
+
   # PowerDNS does not seem to support absolute DNS names... ugh.
   update.Name    = reldom(update.Name)
   update.Content = ' '.join([reldom(comp) for comp in update.Content.split(' ')])
