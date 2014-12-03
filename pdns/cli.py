@@ -27,6 +27,7 @@ import iniherit
 import ConfigParser
 import logging
 import re
+import os.path
 
 from .i18n import _
 from . import engine
@@ -49,6 +50,9 @@ General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program. If not, see http://www.gnu.org/licenses/.
 '''
+
+# todo: use a real parser for this...
+localvars_cre = re.compile(r'-\*-.*pdns-config: ([^\s]*).*-\*-')
 
 #------------------------------------------------------------------------------
 # command aliasing, shamelessly scrubbed from:
@@ -249,6 +253,14 @@ def main(args=None):
   if options.verbose == 1    : rootlog.setLevel(logging.INFO)
   elif options.verbose == 2  : rootlog.setLevel(logging.DEBUG)
   elif options.verbose > 2   : rootlog.setLevel(1)
+
+  if not options.config and options.zonefile:
+    with open(options.zonefile, 'rb') as fp:
+      data = fp.read()
+      match = localvars_cre.search(data)
+      if match:
+        options.config = os.path.join(
+          os.path.dirname(options.zonefile), match.group(1))
 
   if options.config:
     config = ConfigParser.SafeConfigParser()
