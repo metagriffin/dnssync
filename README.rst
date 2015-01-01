@@ -1,16 +1,22 @@
-============================
-PowerDNS Command Line Client
-============================
+==========================
+Hosted DNS Synchronization
+==========================
 
-The `pdns` script allows DNS zones hosted at PowerDNS to be synchronized
-with local bind-style zone files via the PowerDNS API.
+The `dnssync` script allows DNS zones hosted at various DNS providers
+to be synchronized with local bind-style zone files. This allows the
+DNS zones to be easily version-controlled, if the service provider
+does not directly support that.
+
+Currently supported DNS service providers:
+
+* `PowerDNS <http://powerdns.net/>`_
 
 
 Project
 =======
 
-* Homepage: https://github.com/metagriffin/pdns
-* Bugs: https://github.com/metagriffin/pdns/issues
+* Homepage: https://github.com/metagriffin/dnssync
+* Bugs: https://github.com/metagriffin/dnssync/issues
 
 
 Installation
@@ -18,7 +24,7 @@ Installation
 
 .. code-block:: bash
 
-  $ pip install pdns
+  $ pip install dnssync
 
 
 Usage
@@ -28,7 +34,7 @@ To download a zone:
 
 .. code-block:: bash
 
-  $ pdns download --apikey {KEY} --domain {DOMAIN} {ZONEFILE}
+  $ dnssync download --apikey {KEY} --domain {DOMAIN} {ZONEFILE}
 
 
 These command line options can also be stored in a configuration file,
@@ -40,18 +46,18 @@ e.g. ``config.ini``:
   domain        = {DOMAIN}
   zonefile      = {ZONEFILE}
 
-And then invoke pdns as follows:
+And then invoke dnssync as follows:
 
 .. code-block:: bash
 
-  $ pdns download --config config.ini
+  $ dnssync download --config config.ini
 
 
 To upload a zone:
 
 .. code-block:: bash
 
-  $ pdns upload --config config.ini
+  $ dnssync upload --config config.ini
 
 
 And to show differences between the hosted zone and the local
@@ -59,13 +65,13 @@ zonefile:
 
 .. code-block:: bash
 
-  $ pdns diff --config config.ini
+  $ dnssync diff --config config.ini
 
 
 Configuration
 =============
 
-The pdns configuration file can specify the following options:
+The dnssync configuration file can specify the following options:
 
 * ``apikey``: 
 
@@ -110,7 +116,7 @@ Then, to upload the zones:
 .. code-block:: bash
 
   # upload 'example.com'
-  $ pdns upload -c config.ini
+  $ dnssync upload -c config.ini
 
   # upload 'other-example.com'
-  $ pdns upload -c config.ini -d other-example.com
+  $ dnssync upload -c config.ini -d other-example.com

@@ -49,7 +49,7 @@ dependencies = [
 
 entrypoints = {
   'console_scripts': [
-    'pdns               = pdns.cli:main',
+    'dnssync            = dnssync.cli:main',
   ],
 }
 
@@ -66,22 +66,22 @@ classifiers = [
 ]
 
 setup(
-  name                  = 'pdns',
+  name                  = 'dnssync',
   version               = read('VERSION.txt', default='0.0.1').strip(),
-  description           = 'Command line client to synchronize PowerDNS hosted zones with local zone files',
+  description           = 'Command line client to synchronize DNS hosted zones with local zone files',
   long_description      = read('README.rst'),
   classifiers           = classifiers,
   author                = 'metagriffin',
   author_email          = 'mg.pypi@metagriffin.net',
-  url                   = 'http://github.com/metagriffin/pdns',
-  keywords              = 'powerdns api dns zone client command line cli',
+  url                   = 'http://github.com/metagriffin/dnssync',
+  keywords              = 'dns zone synchronize download upload diff client command line cli powerdns',
   packages              = find_packages(),
   platforms             = ['any'],
   include_package_data  = True,
   zip_safe              = True,
   install_requires      = dependencies,
   tests_require         = test_dependencies,
-  test_suite            = 'pdns',
+  test_suite            = 'dnssync',
   entry_points          = entrypoints,
   license               = 'GPLv3+',
 )

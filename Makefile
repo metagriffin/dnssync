@@ -1,2 +1,2 @@
-PKGNAME = pdns
+PKGNAME = dnssync
 include Makefile.python

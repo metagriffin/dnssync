@@ -52,7 +52,7 @@ along with this program. If not, see http://www.gnu.org/licenses/.
 '''
 
 # todo: use a real parser for this...
-localvars_cre = re.compile(r'-\*-.*pdns-config: ([^\s]*).*-\*-')
+localvars_cre = re.compile(r'-\*-.*dnssync-config: ([^\s]*).*-\*-')
 
 #------------------------------------------------------------------------------
 # command aliasing, shamelessly scrubbed from:
