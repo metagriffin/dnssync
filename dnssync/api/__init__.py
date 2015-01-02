@@ -2,8 +2,8 @@
 #------------------------------------------------------------------------------
 # file: $Id$
 # auth: metagriffin <mg.github@metagriffin.net>
-# date: 2015/01/01
-# copy: (C) Copyright 2015-EOT metagriffin -- see LICENSE.txt
+# date: 2014/02/27
+# copy: (C) Copyright 2014-EOT metagriffin -- see LICENSE.txt
 #------------------------------------------------------------------------------
 # This software is free software: you can redistribute it and/or
 # modify it under the terms of the GNU General Public License as
@@ -19,7 +19,8 @@
 # along with this program. If not, see http://www.gnu.org/licenses/.
 #------------------------------------------------------------------------------
 
-__import__('pkg_resources').declare_namespace(__name__)
+from .driver import *
+from .error import *
 
 #------------------------------------------------------------------------------
 # end of $Id$

@@ -49,7 +49,7 @@ dependencies = [
 
 entrypoints = {
   'console_scripts': [
-    'dnssync            = dnssync.cli:main',
+    'dnssync            = dnssync.api.cli:main',
   ],
 }
 
@@ -76,6 +76,7 @@ setup(
   url                   = 'http://github.com/metagriffin/dnssync',
   keywords              = 'dns zone synchronize download upload diff client command line cli powerdns',
   packages              = find_packages(),
+  namespace_packages    = ['dnssync'],
   platforms             = ['any'],
   include_package_data  = True,
   zip_safe              = True,

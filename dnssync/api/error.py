@@ -2,7 +2,7 @@
 #------------------------------------------------------------------------------
 # file: $Id$
 # auth: metagriffin <mg.github@metagriffin.net>
-# date: 2015/01/01
+# date: 2015/01/02
 # copy: (C) Copyright 2015-EOT metagriffin -- see LICENSE.txt
 #------------------------------------------------------------------------------
 # This software is free software: you can redistribute it and/or
@@ -19,7 +19,12 @@
 # along with this program. If not, see http://www.gnu.org/licenses/.
 #------------------------------------------------------------------------------
 
-__import__('pkg_resources').declare_namespace(__name__)
+class Error(Exception): pass
+class ConfigurationError(Error): pass
+class DomainNotFound(Error): pass
+class DriverError(Error): pass
+class UnsupportedRecordType(Error): pass
+class UnexpectedZoneState(Error): pass
 
 #------------------------------------------------------------------------------
 # end of $Id$
