@@ -3,9 +3,9 @@ Hosted DNS Synchronization
 ==========================
 
 The `dnssync` script allows DNS zones hosted at various DNS providers
-to be synchronized with local bind-style zone files. This allows the
-DNS zones to be easily version-controlled, if the service provider
-does not directly support that.
+to be synchronized with local bind-style text zone files. This allows
+the DNS zones to be easily version-controlled, even if the service
+provider does not directly support that.
 
 Currently supported DNS service providers:
 
