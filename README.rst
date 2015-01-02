@@ -30,11 +30,11 @@ Installation
 Usage
 =====
 
-To download a zone:
+To download a zone from PowerDNS:
 
 .. code-block:: bash
 
-  $ dnssync download --apikey {KEY} --domain {DOMAIN} {ZONEFILE}
+  $ dnssync download --driver powerdns --param apikey={KEY} --domain {DOMAIN} {ZONEFILE}
 
 
 These command line options can also be stored in a configuration file,
@@ -42,6 +42,7 @@ e.g. ``config.ini``:
 
 .. code-block:: ini
 
+  driver        = powerdns 
   apikey        = {KEY}
   domain        = {DOMAIN}
   zonefile      = {ZONEFILE}
@@ -73,14 +74,18 @@ Configuration
 
 The dnssync configuration file can specify the following options:
 
-* ``apikey``: 
+* ``driver``:
 
-  The API access key provided by PowerDNS. Note that an account must
-  first be enabled (via the PowerDNS website) before it can be used.
+  The driver for the specific DNS hosting service; currently supported
+  values:
+
+  * ``powerdns``: for PowerDNS.net
+
 
 * ``domain``: 
 
   The name of the zone to be operated on.
+
 
 * ``zonefile``: 
 
@@ -89,6 +94,20 @@ The dnssync configuration file can specify the following options:
   file. If specified on the command line, it is taken to be relative
   to the current working directory.
 
+
+PowerDNS
+--------
+
+The following options exist for the ``powerdns`` driver:
+
+* ``apikey``: 
+
+  The API access key provided by PowerDNS. Note that an account must
+  first be enabled (via the PowerDNS website) before it can be used.
+
+
+Multiple Profiles
+-----------------
 
 Several different profiles can be stored in the same configuration; each
 profile should have a section named after the domain. Global parameters can
@@ -99,6 +118,7 @@ be stored in the "DEFAULT" section. For example:
   [DEFAULT]
 
   # set some global parameters
+  driver        = powerdns
   apikey        = 2f16eef6-5b1f-4d80-96f7-0237da03db48
 
   # set the default domain to manage
@@ -120,3 +140,31 @@ Then, to upload the zones:
 
   # upload 'other-example.com'
   $ dnssync upload -c config.ini -d other-example.com
+
+
+Zonefile Local Variables
+------------------------
+
+The zonefile can also specify the configuration file via emacs-style
+local variables. The configuration file specified on the command line,
+however, takes precedence. For example, given the following
+``example-com.zone`` zonefile:
+
+.. code-block:: text
+
+  ;; -*- coding: utf-8; dnssync-config: config.ini -*-
+
+  $ORIGIN example.com.
+  example.com. 3600 IN SOA ...
+  ... more DNS records ...
+
+The following command will pull all options from the ``config.ini``
+file:
+
+.. code-block:: bash
+
+  # report differences
+  $ dnssync diff example-com.zone
+
+  # upload a new version
+  $ dnssync upload example-com.zone
