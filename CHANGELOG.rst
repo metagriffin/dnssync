@@ -3,6 +3,14 @@ ChangeLog
 =========
 
 
+v0.2.1
+======
+
+* Pushed PowerDNS-specific code into separate module
+* Converted to namespace package
+* Converted engine to use generic API for DNS hosting service drivers
+
+
 v0.2.0
 ======
 
