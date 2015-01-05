@@ -34,20 +34,6 @@ from .protocol import Client
 
 log = logging.getLogger(__name__)
 
-RECORDFMTS = {
-  '*'    : '{name} {ttl} IN {type} {content}',
-  'MX'   : '{name} {ttl} IN {type} {priority} {content}',
-}
-
-#------------------------------------------------------------------------------
-def escapeContent(text):
-  if not text:
-    return text
-  # todo: `dns.rdata._escapify` should really be doing this detection for me...
-  if ';' not in text and ' ' not in text and '"' not in text:
-    return text
-  return '"' + dns.rdata._escapify(text) + '"'
-
 #------------------------------------------------------------------------------
 class Driver(api.Driver):
 
@@ -79,137 +65,70 @@ class Driver(api.Driver):
     return self._zones().keys()
 
   #----------------------------------------------------------------------------
-  def _get(self, name):
+  def getRecords(self, name):
     # TODO: i should really be building this from dns.zone.* calls...
     #       but dnspython is *so* unintuitive! ugh.
-    zid   = self._zones()[name]
-    lines = []
+    zid     = self._zones()[name]
+    records = []
     for record in self.client.service.listRecords(zid).Records.Record:
-      fmt = RECORDFMTS.get(record.Type) or RECORDFMTS.get('*')
-      record.Content = ' '.join([
-        absdom(comp) for comp in record.Content.split()])
-      # todo: is TXT really the only record type?...
-      if record.Type == 'TXT':
-        record.Content = escapeContent(record.Content)
-      lines.append(fmt.format(
+      arec = api.Record(
+        id       = record.Id,
         name     = absdom(record.Name),
         ttl      = record.TimeToLive,
-        type     = record.Type,
-        priority = record.Priority,
-        content  = record.Content,
-      ))
-    data = '\n'.join(lines)
-    return dns.zone.from_text(data, origin=name, relativize=False)
+        rclass   = 'IN',
+        type     = str(record.Type),
+        content  = ' '.join([
+          absdom(comp) for comp in record.Content.split()]),
+      )
+      if arec.type == 'MX':
+        # todo: are MX records really the only ones that can have priorities?...
+        arec.priority = record.Priority
+      records.append(arec)
+    return records
 
   #----------------------------------------------------------------------------
-  def get(self, name):
-    return self._get(name)
-
-  #----------------------------------------------------------------------------
-  def _matchRecord(self, records, record):
-    if not records:
-      return None
-    records = [rec
-               for rec in records
-               if rec.Type == record.Type and rec.Priority == record.Priority
-                 and rec.Name == record.Name]
-    if len(records) > 1:
-      # todo: are MX and NS records really the only ones that can be multiple?...
-      if record.Type not in ('MX', 'NS'):
-        raise api.UnexpectedZoneState(
-          _('multiple records found for type "{type}"', type=record.Type))
-      records = [rec for rec in records if rec.Content == record.Content]
-    if not records:
-      return None
-    if len(records) == 1:
-      return records[0]
-    raise api.UnexpectedZoneState(
-      _('multiple records found for type "{type}" with same content "{content}"',
-        type=record.Type, content=record.Content))
-
-  #----------------------------------------------------------------------------
-  def _updateRecord(self, zoneid, records, record, result):
-
-    update = aadict(
-      Name       = record.name.to_text(),
-      Type       = dns.rdatatype.to_text(record.rdata.rdtype),
-      Priority   = 0,
-      TimeToLive = record.ttl,
-      Content    = record.rdata.to_text(),
-    )
-
-    if update.Type == 'MX':
-      update.Priority = record.rdata.preference
-      update.Content  = record.rdata.exchange.to_text()
-
-    if update.Type == 'TXT':
-      # todo: is this how they should all be done?...
-      update.Content = ' '.join(record.rdata.strings)
-
-    # PowerDNS does not seem to support absolute DNS names... ugh.
-    update.Name    = reldom(update.Name)
-    update.Content = ' '.join([reldom(comp) for comp in update.Content.split(' ')])
-
-    match = self._matchRecord(records, update)
-
-    if not match:
-      log.info('adding %s record: %s (%s)', update.Type, update.Name, update.Content)
-      resp = self.client.service.addRecordToZone(
-        zoneid, update.Name, update.Type, update.Content,
-        update.TimeToLive, update.Priority)
-      if resp.code != 100:
-        raise api.DriverError(
-          _('could not add record {}/{}: {}', update.Name, update.Type, resp.description))
-      result.created += 1
-      return
-
-    records.remove(match)
-
-    if match.TimeToLive == update.TimeToLive and match.Content == update.Content:
-      # todo: check priorities...
-      # todo: anything else?...
-      return
-
-    if match.Type == 'SOA':
-      mseq = int(match.Content.split(' ')[2])
-      useq = int(update.Content.split(' ')[2])
-      if useq < mseq:
-        log.error(
-          'refusing to update SOA record (serial %r is less than %r)', useq, mseq)
-        return
-
-    log.info('updating %s record: %s (%s)', update.Type, update.Name, update.Content)
-    resp = self.client.service.updateRecord(
-      match.Id, update.Name, update.Type, update.Content,
-      update.TimeToLive, update.Priority)
-    if resp.code != 100:
-      raise api.DriverError(
-        _('could not update record {}/{}: {}', update.Name, update.Type, resp.description))
-    result.updated += 1
-    return
-
-  #----------------------------------------------------------------------------
-  def put(self, name, zone):
-    res = aadict(created=0, updated=0, deleted=0)
-    zid = self._zones()[name]
-    records = list(self.client.service.listRecords(zid).Records.Record)
+  def makePutContext(self, name, zone):
+    ret = super(Driver, self).makePutContext(name, zone)
+    ret.zoneid = self._zones()[name]
     for name, ttl, rdata in zone.iterate_rdatas():
       if dns.rdataclass.to_text(rdata.rdclass) != 'IN':
         raise api.UnsupportedRecordType(
           _('PowerdDNS does not support non-"IN" record classes: {!r}',
             (name, ttl, rdata)))
-    for name, ttl, rdata in zone.iterate_rdatas():
-      self._updateRecord(zid, records, aadict(name=name, ttl=ttl, rdata=rdata), res)
-    for record in records:
-      log.info('deleting %s record: %s (%s)', record.Type, record.Name, record.Content)
-      resp = self.client.service.deleteRecordById(record.Id)
-      if resp.code != 100:
-        raise api.DriverError(
-          _('could not delete record {}/{}: {}', record.Name, record.Type, resp.description))
-      # todo: check response...
-      res.deleted += 1
-    return res
+    return ret
 
+  #----------------------------------------------------------------------------
+  def createRecord(self, context, record):
+
+    # PowerDNS does not seem to support absolute DNS names... ugh.
+    name    = reldom(record.name)
+    content = ' '.join([reldom(comp) for comp in record.content.split(' ')])
+
+    resp = self.client.service.addRecordToZone(
+      context.zoneid, name, record.type, content, record.ttl, record.priority or 0)
+    if resp.code != 100:
+      raise api.DriverError(
+        _('could not add record {}/{}: {}', record.name, record.type, resp.description))
+
+  #----------------------------------------------------------------------------
+  def updateRecord(self, context, record, oldrecord):
+
+    # PowerDNS does not seem to support absolute DNS names... ugh.
+    name    = reldom(record.name)
+    content = ' '.join([reldom(comp) for comp in record.content.split(' ')])
+
+    resp = self.client.service.updateRecord(
+      oldrecord.id, name, record.type, content, record.ttl, record.priority or 0)
+    if resp.code != 100:
+      raise api.DriverError(
+        _('could not update record {}/{}: {}', record.name, record.type, resp.description))
+
+  #----------------------------------------------------------------------------
+  def deleteRecord(self, context, record):
+    resp = self.client.service.deleteRecordById(record.id)
+    if resp.code != 100:
+      raise api.DriverError(
+        _('could not delete record {}/{}: {}', record.name, record.type, resp.description))
 
 #------------------------------------------------------------------------------
 # end of $Id$
