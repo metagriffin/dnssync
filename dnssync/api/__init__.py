@@ -21,6 +21,7 @@
 
 from .driver import *
 from .error import *
+from .record import *
 
 #------------------------------------------------------------------------------
 # end of $Id$
