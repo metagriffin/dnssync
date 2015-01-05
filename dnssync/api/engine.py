@@ -107,7 +107,7 @@ def cmd_upload(ctxt):
 
 #------------------------------------------------------------------------------
 def cmd_list(ctxt):
-  for zname in ctxt.driver.list():
+  for zname in sorted(ctxt.driver.list()):
     sys.stdout.write(reldom(zname) + '\n')
   return 0
 
