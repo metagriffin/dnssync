@@ -310,7 +310,7 @@ def main(args=None):
           params[attr] = config.get(section, attr)
     # /TODO
 
-    if not options.zonefile:
+    if not getattr(options, 'zonefile', None):
       if config.has_option(section, 'zonefile'):
         # TODO: make relative to config...
         options.zonefile = config.get(section, 'zonefile')
@@ -320,7 +320,7 @@ def main(args=None):
 
   try:
     module = getattr(__import__('dnssync.' + params.driver), params.driver)
-  except ImportError:
+  except ImportError as err:
     print(_('[**] ERROR: unknown/unavailable driver "{}"', params.driver), file=sys.stderr)
     return 10
 
