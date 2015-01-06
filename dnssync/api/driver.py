@@ -96,9 +96,10 @@ class Driver(object):
   #----------------------------------------------------------------------------
   def makePutContext(self, name, zone):
     return aadict(
-      name    = name,
-      zone    = zone,
-      records = self.getRecords(name),
+      name       = name,
+      zone       = zone,
+      records    = self.getRecords(name),
+      newrecords = [Record.from_rdata(rdata) for rdata in zone.iterate_rdatas()],
     )
 
   #----------------------------------------------------------------------------
@@ -113,8 +114,7 @@ class Driver(object):
     '''
     res = aadict(created=0, updated=0, deleted=0)
     context = self.makePutContext(name, zone)
-    for rdata in zone.iterate_rdatas():
-      record = Record.from_rdata(rdata)
+    for record in context.newrecords:
       match  = self._matchRecord(context, record)
       if not match:
         log.info('adding %s record: %s (%s)', record.type, record.name, record.content)
