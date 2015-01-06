@@ -289,6 +289,7 @@ def main(args=None):
           options.config = os.path.join(
             os.path.dirname(options.zonefile), match.group(1))
       if not options.domain:
+        # todo: perhaps use dns.zone for this?...
         match = localorigin_cre.search(data)
         if match:
           options.domain = params.domain = match.group(1)
