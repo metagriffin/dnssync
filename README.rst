@@ -10,6 +10,7 @@ provider does not directly support that.
 Currently supported DNS service providers:
 
 * `PowerDNS <http://powerdns.net/>`_
+* `DomainMonster <http://domainmonster.com/>`_
 
 
 Project
@@ -104,6 +105,20 @@ The following options exist for the ``powerdns`` driver:
 
   The API access key provided by PowerDNS. Note that an account must
   first be enabled (via the PowerDNS website) before it can be used.
+
+
+DomainMonster
+-------------
+
+The following options exist for the ``domainmonster`` driver:
+
+* ``username``: 
+
+  The username of the account to log into DomainMonster with.
+
+* ``password``:
+
+  The password of the specified `username` account.
 
 
 Multiple Profiles
