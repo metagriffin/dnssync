@@ -27,6 +27,7 @@ from aadict import aadict
 FORMATS = {
   '*'    : '{name} {ttl} {rclass} {type} {content}',
   'MX'   : '{name} {ttl} {rclass} {type} {priority} {content}',
+  'SRV'  : '{name} {ttl} {rclass} {type} {priority} {weight} {port} {content}',
 }
 
 #------------------------------------------------------------------------------
@@ -43,8 +44,8 @@ class Record(object):
 
   #----------------------------------------------------------------------------
   def __init__(self, id=None,
-               name=None, ttl=None, rclass=None, type=None,
-               priority=None, content=None,
+               name=None, ttl=None, rclass=None, type=None, content=None,
+               priority=None, weight=None, port=None,
                *args, **kw):
     super(Record, self).__init__(*args, **kw)
     self.id       = id
@@ -53,6 +54,8 @@ class Record(object):
     self.rclass   = rclass
     self.type     = type
     self.priority = priority
+    self.weight   = weight
+    self.port     = port
     self.content  = content
 
   #----------------------------------------------------------------------------
@@ -64,6 +67,8 @@ class Record(object):
       rclass   = dns.rdataclass.to_text(rdata[2].rdclass),
       type     = str(dns.rdatatype.to_text(rdata[2].rdtype)),
       priority = getattr(rdata[2], 'preference', None),
+      # TODO: weight?...
+      # TODO: port?...
       content  = rdata[2].to_text(),
     )
     if ret.type == 'MX':
