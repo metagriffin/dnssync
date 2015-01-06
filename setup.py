@@ -35,6 +35,8 @@ def read(*parts, **kw):
 test_dependencies = [
   'nose                 >= 1.3.0',
   'coverage             >= 3.5.3',
+  'globre               >= 0.0.5',
+  'asset                >= 0.6',
 ]
 
 dependencies = [
@@ -45,6 +47,8 @@ dependencies = [
   'blessings            >= 1.5.1',
   'aadict               >= 0.2.1',
   'suds                 >= 0.4',
+  'requests             >= 2.5.1',
+  'PyYAML               >= 3.11',
 ]
 
 entrypoints = {

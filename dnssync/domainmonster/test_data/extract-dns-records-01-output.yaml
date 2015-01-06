@@ -1,0 +1,69 @@
+- id: "2377635"
+  name: example.com.
+  ttl: null
+  rclass: null
+  type: A
+  priority: null
+  weight: null
+  port: null
+  content: 10.1.2.3
+
+- id: "2389334"
+  name: td3.example.com.
+  ttl: null
+  rclass: null
+  type: A
+  priority: null
+  weight: null
+  port: null
+  content: 10.1.2.4
+
+- id: "2377636"
+  name: www.example.com.
+  ttl: null
+  rclass: null
+  type: A
+  priority: null
+  weight: null
+  port: null
+  content: 10.1.2.3
+
+- id: "2377641"
+  name: archive.example.com.
+  ttl: null
+  rclass: null
+  type: CNAME
+  priority: null
+  weight: null
+  port: null
+  content: www.example.com.
+
+- id: "2377638"
+  name: example.com.
+  ttl: null
+  rclass: null
+  type: MX
+  priority: 10
+  weight: null
+  port: null
+  content: mail.example.com.
+
+- id: "2377639"
+  ttl: null
+  name: example.com.
+  rclass: null
+  type: TXT
+  priority: null
+  weight: null
+  port: null
+  content: v=spf1 mx a -all
+
+- id: "3389819"
+  ttl: null
+  name: _http.example.com.
+  rclass: null
+  type: SRV
+  priority: 13
+  weight: 14
+  port: 80
+  content: www.example.com.
