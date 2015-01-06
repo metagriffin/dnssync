@@ -3,6 +3,13 @@ ChangeLog
 =========
 
 
+v0.2.2
+======
+
+* Added DomainMonster support
+* Added SRV record support in API
+
+
 v0.2.1
 ======
 
