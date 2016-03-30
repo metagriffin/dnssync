@@ -3,6 +3,12 @@ ChangeLog
 =========
 
 
+v0.2.3
+======
+
+* Added work-around for PowerDNS "injected" intermediary records
+
+
 v0.2.2
 ======
 
