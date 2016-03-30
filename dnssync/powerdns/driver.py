@@ -71,14 +71,18 @@ class Driver(api.Driver):
     zid     = self._zones()[name]
     records = []
     for record in self.client.service.listRecords(zid).Records.Record:
+      if record.Type is None:
+        # todo: should this really just be ignored? what *is* this??
+        continue
+      content = ' '.join([
+        absdom(comp) for comp in record.Content.split()])
       arec = api.Record(
         id       = record.Id,
         name     = absdom(record.Name),
         ttl      = record.TimeToLive,
         rclass   = 'IN',
         type     = str(record.Type),
-        content  = ' '.join([
-          absdom(comp) for comp in record.Content.split()]),
+        content  = content,
       )
       if arec.type == 'MX':
         # todo: are MX records really the only ones that can have priorities?...
