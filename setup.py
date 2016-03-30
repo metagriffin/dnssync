@@ -35,17 +35,16 @@ def read(*parts, **kw):
 test_dependencies = [
   'nose                 >= 1.3.0',
   'coverage             >= 3.5.3',
-  'globre               >= 0.0.5',
-  'asset                >= 0.6',
+  'globre               >= 0.1.3',
+  'asset                >= 0.6.10',
 ]
 
 dependencies = [
-  'distribute           >= 0.6.24',
   'iniherit             >= 0.1.7',
   'dnspython            >= 1.11.1',
   'six                  >= 1.6.1',
   'blessings            >= 1.5.1',
-  'aadict               >= 0.2.1',
+  'aadict               >= 0.2.2',
   'suds                 >= 0.4',
   'requests             >= 2.5.1',
   'PyYAML               >= 3.11',
