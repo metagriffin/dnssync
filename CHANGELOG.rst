@@ -3,6 +3,16 @@ ChangeLog
 =========
 
 
+v0.2.4
+======
+
+* Improved error checking of PowerDNS responses
+* Switched to use `suds-jurko` instead of `suds`
+  (`suds` appears to be dead... see https://bitbucket.org/jurko/suds)
+* Marked package "beta" (from "alpha")
+* Removed "distribute" dependency
+
+
 v0.2.3
 ======
 
