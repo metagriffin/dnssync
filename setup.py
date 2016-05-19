@@ -45,9 +45,13 @@ dependencies = [
   'six                  >= 1.6.1',
   'blessings            >= 1.5.1',
   'aadict               >= 0.2.2',
-  'suds                 >= 0.4',
   'requests             >= 2.5.1',
   'PyYAML               >= 3.11',
+  # NOTE: this *should* be using the `suds` package, which appears to
+  #       be dead. so using the suds-jurko fork for now... see
+  #       https://bitbucket.org/jurko/suds
+  'suds-jurko           >= 0.6',
+  # 'suds                 >= 0.4',
 ]
 
 entrypoints = {
