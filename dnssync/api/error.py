@@ -23,6 +23,7 @@ class Error(Exception): pass
 class ConfigurationError(Error): pass
 class DomainNotFound(Error): pass
 class DriverError(Error): pass
+class AuthenticationError(DriverError): pass
 class UnsupportedRecordType(Error): pass
 class UnexpectedZoneState(Error): pass
 
