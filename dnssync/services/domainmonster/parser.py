@@ -20,8 +20,9 @@
 #------------------------------------------------------------------------------
 
 import re
+
+from six.moves import html_parser
 from aadict import aadict
-import HTMLParser
 
 from dnssync import api
 from dnssync.api.util import absdom

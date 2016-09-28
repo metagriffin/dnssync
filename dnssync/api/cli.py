@@ -23,11 +23,12 @@ from __future__ import print_function
 
 import sys
 import argparse
-import iniherit
-import ConfigParser
 import logging
 import re
 import os.path
+
+import iniherit
+from six.moves import configparser
 from aadict import aadict
 
 from .i18n import _
@@ -295,7 +296,7 @@ def main(args=None):
           options.domain = params.domain = match.group(1)
 
   if options.config:
-    config = ConfigParser.SafeConfigParser()
+    config = configparser.SafeConfigParser()
     config.optionxform = str.lower
     config.read(options.config)
     section = options.domain
