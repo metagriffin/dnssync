@@ -20,6 +20,7 @@
 #------------------------------------------------------------------------------
 
 import logging
+
 import dns.rdata
 import dns.zone
 from aadict import aadict
@@ -134,6 +135,8 @@ class Driver(api.Driver):
       raise api.DriverError(
         _('could not delete record {}/{}: {}', record.name, record.type, resp.description))
 
+
 #------------------------------------------------------------------------------
 # end of $Id$
+# $ChangeLog$
 #------------------------------------------------------------------------------

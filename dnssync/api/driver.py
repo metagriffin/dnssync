@@ -20,6 +20,7 @@
 #------------------------------------------------------------------------------
 
 import logging
+
 import dns.rdata
 import dns.zone
 from aadict import aadict
@@ -179,6 +180,8 @@ class Driver(object):
   def deleteRecord(self, context, record):
     raise NotImplementedError()
 
+
 #------------------------------------------------------------------------------
 # end of $Id$
+# $ChangeLog$
 #------------------------------------------------------------------------------

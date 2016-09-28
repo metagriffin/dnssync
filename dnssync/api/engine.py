@@ -20,12 +20,13 @@
 #------------------------------------------------------------------------------
 
 import sys
-import six
-import dns.zone
 import difflib
 import subprocess
-from aadict import aadict
 import logging
+
+import six
+import dns.zone
+from aadict import aadict
 
 from .i18n import _
 from .util import absdom, reldom
@@ -132,4 +133,5 @@ def run(command, driver, options):
 
 #------------------------------------------------------------------------------
 # end of $Id$
+# $ChangeLog$
 #------------------------------------------------------------------------------

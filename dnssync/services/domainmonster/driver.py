@@ -23,11 +23,12 @@
 #       (instead of being faked, as here)
 
 import logging
+import time
+
 import dns.rdata
 import dns.zone
 from aadict import aadict
 import requests
-import time
 from six.moves.urllib import parse as urlparse
 
 from dnssync import api
@@ -216,6 +217,8 @@ class Driver(api.Driver):
     data = dict(action='updatedns', remove=record.id)
     self._postDnsAction(record, 'delete', data)
 
+
 #------------------------------------------------------------------------------
 # end of $Id$
+# $ChangeLog$
 #------------------------------------------------------------------------------

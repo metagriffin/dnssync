@@ -20,6 +20,7 @@
 #------------------------------------------------------------------------------
 
 import unittest
+
 import six
 import asset
 import yaml
@@ -48,6 +49,8 @@ class TestParser(unittest.TestCase):
   # TODO: replace `requests` library with a fake request/response re-enacter
   #       and test all of the `Driver.put` methods...
 
+
 #------------------------------------------------------------------------------
 # end of $Id$
+# $ChangeLog$
 #------------------------------------------------------------------------------
