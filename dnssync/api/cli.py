@@ -30,6 +30,7 @@ import os.path
 import iniherit
 from six.moves import configparser
 from aadict import aadict
+import asset
 
 from .i18n import _
 from . import engine
@@ -57,6 +58,8 @@ along with this program. If not, see http://www.gnu.org/licenses/.
 # todo: use real parsers for these...
 localvars_cre   = re.compile(r'-\*-.*dnssync-config:\s+([^\s]+).*-\*-')
 localorigin_cre = re.compile(r'\$ORIGIN\s+([^\s]+)')
+
+SERVICES_PLUGINS        = 'dnssync.services.plugins'
 
 #------------------------------------------------------------------------------
 # command aliasing, shamelessly scrubbed from:
@@ -321,13 +324,15 @@ def main(args=None):
     cli.error(_('required parameter "driver" not specified'))
 
   try:
-    module = getattr(__import__('dnssync.' + params.driver), params.driver)
-  except ImportError as err:
+    # module = getattr(__import__('dnssync.' + params.driver), params.driver)
+    plugins = asset.plugins(SERVICES_PLUGINS, params.driver)
+  except ValueError as err:
     print(_('[**] ERROR: unknown/unavailable driver "{}"', params.driver), file=sys.stderr)
     return 10
 
   try:
-    driver = module.Driver(params)
+    # driver = module.Driver(params)
+    driver = plugins.handle(None, params)
     return engine.run(options.command, driver, options)
   except error.Error as err:
     print(_('[**] ERROR: {}: {}', err.__class__.__name__, err.message), file=sys.stderr)

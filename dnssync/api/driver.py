@@ -51,12 +51,20 @@ class Driver(object):
     raise NotImplementedError()
 
   #----------------------------------------------------------------------------
-  def __init__(self, params, *args, **kw):
+  def __init__(self, extend, params, *args, **kw):
     '''
     Creates a new instance of a subclass of :class:`.Driver` with the
     specified parameters `params`, which is a dict with attributes set
     to the current configuration values.
+
+    During driver plugin loading, `extend` is the previous plugin's
+    constructed `Driver` object. Since the default driver does not
+    know how to handle multi-plugin drivers, it throws an error. So,
+    if your subclass knows what to do, it should handle it and set it
+    to None before calling super.
     '''
+    if extend is not None:
+      raise Value
     super(Driver, self).__init__(*args, **kw)
     self.params = params
 

@@ -30,6 +30,7 @@ import dns.zone
 from aadict import aadict
 import requests
 from six.moves.urllib import parse as urlparse
+import asset
 
 from dnssync import api
 from dnssync.api.util import absdom, reldom
@@ -42,6 +43,7 @@ from . import parser
 log = logging.getLogger(__name__)
 
 #------------------------------------------------------------------------------
+@asset.plugin('dnssync.services.plugins', 'domainmonster')
 class Driver(api.Driver):
 
   name = 'domainmonster'

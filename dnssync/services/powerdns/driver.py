@@ -24,6 +24,7 @@ import logging
 import dns.rdata
 import dns.zone
 from aadict import aadict
+import asset
 
 from dnssync import api
 from dnssync.api.util import absdom, reldom
@@ -36,6 +37,7 @@ from .protocol import Client
 log = logging.getLogger(__name__)
 
 #------------------------------------------------------------------------------
+@asset.plugin('dnssync.services.plugins', 'powerdns')
 class Driver(api.Driver):
 
   name = 'powerdns'

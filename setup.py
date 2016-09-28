@@ -36,7 +36,6 @@ test_dependencies = [
   'nose                 >= 1.3.0',
   'coverage             >= 3.5.3',
   'globre               >= 0.1.3',
-  'asset                >= 0.6.10',
 ]
 
 dependencies = [
@@ -47,6 +46,7 @@ dependencies = [
   'aadict               >= 0.2.2',
   'requests             >= 2.5.1',
   'PyYAML               >= 3.11',
+  'asset                >= 0.6.10',
   # NOTE: this *should* be using the `suds` package, which appears to
   #       be dead. so using the suds-jurko fork for now... see
   #       https://bitbucket.org/jurko/suds
@@ -57,6 +57,11 @@ dependencies = [
 entrypoints = {
   'console_scripts': [
     'dnssync            = dnssync.api.cli:main',
+  ],
+  ## TODO: use `asset.find_plugins` when it exists...
+  'dnssync.services.plugins' : [
+    'domainmonster      = dnssync.services.domainmonster:Driver',
+    'powerdns           = dnssync.services.powerdns:Driver',
   ],
 }
 
@@ -95,4 +100,5 @@ setup(
 
 #------------------------------------------------------------------------------
 # end of $Id$
+# $ChangeLog$
 #------------------------------------------------------------------------------
