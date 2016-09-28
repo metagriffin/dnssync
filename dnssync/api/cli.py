@@ -177,6 +177,11 @@ def main(args=None):
     help=_('increase verbosity (can be specified multiple times)'))
 
   common.add_argument(
+    _('-l'), _('--list-drivers'),
+    dest='listdrivers', default=False, action='store_true',
+    help=_('list all available drivers and exit'))
+
+  common.add_argument(
     _('-c'), _('--config'), metavar=_('FILENAME'),
     dest='config', default=None,
     help=_('configuration filename'))
@@ -262,9 +267,9 @@ def main(args=None):
   #       "-c --warranty", i.e. the filename is named "--warranty", but...
   if args == None:
     args = sys.argv[1:]
-  if args == ['--warranty']:
+  if args in [['--warranty'], ['--list-drivers'], ['-l']]:
     # bogus injection of command to make the parser happy...
-    args = ['diff', '--warranty']
+    args = ['diff'] + args
 
   options = cli.parse_args(args=args)
   params  = aadict(par.split('=', 1) for par in options.params)
@@ -273,6 +278,16 @@ def main(args=None):
 
   if options.warranty:
     sys.stdout.write(WARRANTY)
+    return 0
+
+  if options.listdrivers:
+    plugins = asset.plugins(SERVICES_PLUGINS)
+    if not plugins:
+      print(_('Yikes, no dnssync plugins found!'))
+      return 1
+    print(_('Currently available service drivers:'))
+    for plugin in plugins:
+      print(_('  - {name}', name=plugin.name))
     return 0
 
   rootlog = logging.getLogger()
