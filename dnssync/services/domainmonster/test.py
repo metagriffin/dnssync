@@ -32,7 +32,7 @@ class TestParser(unittest.TestCase):
 
   maxDiff = None
 
-  ASSET_DATA_DIR = 'dnssync:domainmonster/test_data/'
+  ASSET_DATA_DIR = 'dnssync:services/domainmonster/test_data/'
 
   #----------------------------------------------------------------------------
   def getData(self, name):
