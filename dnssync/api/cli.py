@@ -177,6 +177,7 @@ def main(args=None):
     dest='verbose', action='count', default=0,
     help=_('increase verbosity (can be specified multiple times)'))
 
+  # todo: make this a command instead? eg ``dnssync list-drivers``
   common.add_argument(
     _('-l'), _('--list-drivers'),
     dest='listdrivers', default=False, action='store_true',
@@ -260,6 +261,21 @@ def main(args=None):
     nargs='?',
     help=_('the filename of the local zone file'))
   subcli.set_defaults(command='diff')
+
+  # VERIFY command
+  subcli = subcmds.add_parser(
+    _('verify'),
+    parents=[common],
+    help=_('verify a zone record against a DNS server'))
+  subcli.add_argument(
+    _('-s'), _('--server'), metavar=_('HOSTNAME'),
+    dest='server', default=None,
+    help=_('server to query (defaults to standard DNS)'))
+  subcli.add_argument(
+    'zonefile', metavar=_('ZONEFILE'),
+    nargs='?',
+    help=_('the filename of the local zone file'))
+  subcli.set_defaults(command='verify')
 
   # todo: if only "--warranty" is specified, parse_args aborts... therefore
   #       adding hack here... note that this is still not "perfect", since
