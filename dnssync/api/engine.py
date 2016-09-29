@@ -23,14 +23,18 @@ import sys
 import difflib
 import subprocess
 import logging
+import socket
 
 import six
 import dns.zone
+import dns.resolver
 from aadict import aadict
+from six.moves import StringIO
 
 from .i18n import _
 from .util import absdom, reldom
 from .error import *
+from .record import Record
 
 #------------------------------------------------------------------------------
 
@@ -55,11 +59,12 @@ def cmd_download(ctxt):
   return 0
 
 #------------------------------------------------------------------------------
-def renderDiff(lines):
+def renderDiff(lines, fp=None):
+  fp = fp or sys.stdout
   from blessings import Terminal
   if not Terminal().is_a_tty:
     for line in lines:
-      print line
+      fp.write(line + '\n')
     return
   try:
     proc = subprocess.Popen(
@@ -68,33 +73,36 @@ def renderDiff(lines):
     output, errput = proc.communicate('\n'.join(lines))
     if errput:
       for line in lines:
-        print line
+        fp.write(line + '\n')
       return
-    print output
+    fp.write(output + '\n')
   except Exception as err:
     for line in lines:
-      print line
+      fp.write(line + '\n')
+
+#------------------------------------------------------------------------------
+def zonediff(zoneA, zoneB, labelA, labelB, fp=None):
+  pbuf  = six.StringIO()
+  lbuf  = six.StringIO()
+  zoneA.to_file(pbuf, relativize=False)
+  zoneB.to_file(lbuf, relativize=False)
+  pbuf = sorted(pbuf.getvalue().split('\n'))
+  lbuf = sorted(lbuf.getvalue().split('\n'))
+  count = 0
+  lines = [line.rstrip() for line in difflib.unified_diff(
+    pbuf, lbuf, fromfile=labelA, tofile=labelB)]
+  if lines:
+    renderDiff(lines, fp)
+  return len(lines)
 
 #------------------------------------------------------------------------------
 def cmd_diff(ctxt):
   # todo: sort by: type => name => priority
   pzone = ctxt.driver.get(ctxt.domain)
   lzone = dns.zone.from_file(ctxt.zonefile, origin=ctxt.domain, relativize=False)
-  pbuf  = six.StringIO()
-  lbuf  = six.StringIO()
-  pzone.to_file(pbuf, relativize=False)
-  lzone.to_file(lbuf, relativize=False)
-  pbuf = sorted(pbuf.getvalue().split('\n'))
-  lbuf = sorted(lbuf.getvalue().split('\n'))
-  count = 0
-  lines = [line.rstrip() for line in difflib.unified_diff(
-    pbuf, lbuf,
-    fromfile = _('{domain} <service "{service}">', domain=ctxt.domain, service=ctxt.driver.name),
-    tofile   = _('{domain} <zonefile "{zonefile}">', domain=ctxt.domain, zonefile=ctxt.zonefile))
-  ]
-  if lines:
-    renderDiff(lines)
-  return len(lines)
+  return zonediff(pzone, lzone,
+    _('{domain} <service "{service}">', domain=ctxt.domain, service=ctxt.driver.name),
+    _('{domain} <zonefile "{zonefile}">', domain=ctxt.domain, zonefile=ctxt.zonefile))
 
 #------------------------------------------------------------------------------
 def cmd_upload(ctxt):
@@ -113,13 +121,55 @@ def cmd_list(ctxt):
   return 0
 
 #------------------------------------------------------------------------------
+def getDnsRecords(record, resolver):
+  try:
+    ans = resolver.query(record.name, rdtype=record.type, rdclass=record.rclass)
+  except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN):
+    return []
+  rdset = ans.response.answer[0].to_rdataset()
+  # todo: is there a better place to get this TTL from?...
+  return [Record.from_rdata([ans.qname, record.ttl, rdat]) for rdat in rdset]
+
+#------------------------------------------------------------------------------
+def cmd_verify(ctxt):
+  lzone    = dns.zone.from_file(ctxt.zonefile, origin=ctxt.domain, relativize=False)
+  server   = ctxt.options.server
+  resolver = dns.resolver
+  if server:
+    sio = StringIO('nameserver ' + socket.gethostbyname(server))
+    resolver = dns.resolver.Resolver(sio)
+
+  # TODO: i should really be building this from dns.zone.* calls...
+  #       but dnspython is *so* unintuitive! ugh.
+  records = dict()
+  for rdata in lzone.iterate_rdatas():
+    record = Record.from_rdata(rdata)
+    if record.name not in records:
+      records[record.name] = dict()
+    if record.type in records[record.name]:
+      continue
+    records[record.name][record.type] = getDnsRecords(record, resolver)
+  data = '\n'.join(rec.toText()
+                   for name, types in records.items()
+                   for recs in types.values()
+                   for rec in recs)
+  dzone = dns.zone.from_text(data, origin=ctxt.domain, relativize=False)
+  # /TODO
+
+  return zonediff(lzone, dzone,
+    _('{domain} <zonefile "{zonefile}">', domain=ctxt.domain, zonefile=ctxt.zonefile),
+    _('{domain} <DNS "{server}">', domain=ctxt.domain, server=server or 'default'))
+
+#------------------------------------------------------------------------------
 def run(command, driver, options):
 
-  context = aadict()
-  context.config   = options.config
-  context.driver   = driver
-  context.domain   = absdom(options.domain) if options.domain else None
-  context.zonefile = getattr(options, 'zonefile', None)
+  context = aadict(
+    options  = options,
+    config   = options.config,
+    driver   = driver,
+    domain   = absdom(options.domain) if options.domain else None,
+    zonefile = getattr(options, 'zonefile', None),
+  )
 
   if command != 'list':
     if not context.domain:
