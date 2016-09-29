@@ -35,6 +35,7 @@ import asset
 from .i18n import _
 from . import engine
 from . import error
+from .util import evalenv
 
 #------------------------------------------------------------------------------
 
@@ -317,6 +318,9 @@ def main(args=None):
     config = configparser.SafeConfigParser()
     config.optionxform = str.lower
     config.read(options.config)
+    for section in ['DEFAULT'] + config.sections():
+      for key, val in config.items(section):
+        config.set(section, key, evalenv(val))
     section = options.domain
     if not section and config.has_option('DEFAULT', 'domain'):
       section = config.get('DEFAULT', 'domain')
@@ -339,14 +343,12 @@ def main(args=None):
     cli.error(_('required parameter "driver" not specified'))
 
   try:
-    # module = getattr(__import__('dnssync.' + params.driver), params.driver)
     plugins = asset.plugins(SERVICES_PLUGINS, params.driver)
   except ValueError as err:
     print(_('[**] ERROR: unknown/unavailable driver "{}"', params.driver), file=sys.stderr)
     return 10
 
   try:
-    # driver = module.Driver(params)
     driver = plugins.handle(None, params)
     return engine.run(options.command, driver, options)
   except error.Error as err:
