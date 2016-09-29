@@ -20,6 +20,9 @@
 #------------------------------------------------------------------------------
 
 import re
+import os
+
+import morph
 
 #------------------------------------------------------------------------------
 
@@ -73,5 +76,33 @@ def reldom(domain):
   return domain
 
 #------------------------------------------------------------------------------
+_evalenv_re = re.compile(
+  '(.*?)\\$\\{ENV:([^:}]*)(:-([^}]*))?\\}', flags=re.DOTALL)
+def evalenv(val, context=None):
+  '''
+  Executes environment variable expansion on ``val`` where any
+  sequence in the format ${ENV:NAME[:-DEFAULT]} is substituted. If the
+  specified environment variable is not defined and no default is
+  provided, then a ValueError is raised.
+  '''
+  if not morph.isstr(val):
+    return val
+  # todo: use re.finditer()...
+  # todo: this expression evaluation is very primitive...
+  match = _evalenv_re.match(val)
+  if not match:
+    return val
+  ret = match.group(1)
+  if match.group(2) in os.environ:
+    ret += os.environ.get(match.group(2))
+  elif match.group(3):
+    # todo: expand based on content of context?...
+    ret += match.group(4)
+  else:
+    raise ValueError('environment variable "%s" not defined' % (match.group(2),))
+  return ret + evalenv(val[len(match.group(0)):])
+
+#------------------------------------------------------------------------------
 # end of $Id$
+# $ChangeLog$
 #------------------------------------------------------------------------------
