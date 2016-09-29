@@ -84,7 +84,8 @@ class Driver(api.Driver):
   def _switchToZone(self, name):
     zones = self._zones()
     if name not in zones:
-      raise api.DomainNotFound(name)
+      raise api.DomainNotFound(
+        _('this DomainMonster account does not manage domain "{}"', name))
     zid = zones[name]
     resp = self.session.post(self.BASEURL + '/members/manage/', data=dict(
       setdm    = '1',
