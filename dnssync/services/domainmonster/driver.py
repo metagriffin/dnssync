@@ -59,12 +59,19 @@ class Driver(api.Driver):
     self.session = requests.Session()
     resp = self.session.post(
       self.BASEURL + '/login/',
+      allow_redirects = False,
       data = {
         'action'   : 'dologin',
         'username' : self.params.username,
         'password' : self.params.password,
       })
-    # todo: check response...
+    if not resp.is_redirect \
+        or resp.headers['location'] != self.BASEURL + '/members/':
+      if 'Invalid Email Address or Password' in resp.text:
+        raise api.AuthenticationError(
+          _('invalid DomainMonster account username and/or password'))
+      raise api.AuthenticationError(
+        _('unknown/unexpected login response'))
 
   #----------------------------------------------------------------------------
   def _zones(self):
