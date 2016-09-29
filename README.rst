@@ -78,7 +78,7 @@ And to test that a DNS server is serving the zone as specified:
 
 Note that the ``verify`` command has some limitations in how accurate
 it can be. For example, record-level TTL's cannot be extracted from
-DNS (only time to expiry).
+DNS (only remaining time, not total time, to expiry).
 
 
 Configuration
