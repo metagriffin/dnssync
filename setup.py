@@ -47,6 +47,7 @@ dependencies = [
   'requests             >= 2.5.1',
   'PyYAML               >= 3.11',
   'asset                >= 0.6.10',
+  'morph                >= 0.1.2',
   # NOTE: this *should* be using the `suds` package, which appears to
   #       be dead. so using the suds-jurko fork for now... see
   #       https://bitbucket.org/jurko/suds
