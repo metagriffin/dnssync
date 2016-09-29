@@ -77,7 +77,8 @@ And to test that a DNS server is serving the zone as specified:
   $ dnssync verify --config config.ini
 
 Note that the ``verify`` command has some limitations in how accurate
-it can be. For example, a wildcard record cannot be tested explicitly.
+it can be. For example, record-level TTL's cannot be extracted from
+DNS (only time to expiry).
 
 
 Configuration
