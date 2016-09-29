@@ -23,7 +23,7 @@ Project
 Installation
 ============
 
-.. code-block:: bash
+.. code:: bash
 
   $ pip install dnssync
 
@@ -33,7 +33,7 @@ Usage
 
 To download a zone from PowerDNS:
 
-.. code-block:: bash
+.. code:: bash
 
   $ dnssync download --driver powerdns --param apikey={KEY} --domain {DOMAIN} {ZONEFILE}
 
@@ -41,7 +41,7 @@ To download a zone from PowerDNS:
 These command line options can also be stored in a configuration file,
 e.g. ``config.ini``:
 
-.. code-block:: ini
+.. code:: ini
 
   driver        = powerdns 
   apikey        = {KEY}
@@ -50,14 +50,14 @@ e.g. ``config.ini``:
 
 And then invoke dnssync as follows:
 
-.. code-block:: bash
+.. code:: bash
 
   $ dnssync download --config config.ini
 
 
 To upload a zone:
 
-.. code-block:: bash
+.. code:: bash
 
   $ dnssync upload --config config.ini
 
@@ -128,7 +128,7 @@ Several different profiles can be stored in the same configuration; each
 profile should have a section named after the domain. Global parameters can
 be stored in the "DEFAULT" section. For example:
 
-.. code-block:: ini
+.. code:: ini
 
   [DEFAULT]
 
@@ -148,7 +148,7 @@ be stored in the "DEFAULT" section. For example:
 
 Then, to upload the zones:
 
-.. code-block:: bash
+.. code:: bash
 
   # upload 'example.com'
   $ dnssync upload -c config.ini
@@ -165,7 +165,7 @@ local variables. The configuration file specified on the command line,
 however, takes precedence. For example, given the following
 ``example-com.zone`` zonefile:
 
-.. code-block:: text
+.. code:: text
 
   ;; -*- coding: utf-8; dnssync-config: config.ini -*-
 
@@ -176,7 +176,7 @@ however, takes precedence. For example, given the following
 The following command will pull all options from the ``config.ini``
 file:
 
-.. code-block:: bash
+.. code:: bash
 
   # report differences
   $ dnssync diff example-com.zone
