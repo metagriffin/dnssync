@@ -42,6 +42,9 @@ def escapeContent(text):
 #------------------------------------------------------------------------------
 class Record(object):
 
+  TYPE_MX               = 'MX'
+  TYPE_TXT              = 'TXT'
+
   #----------------------------------------------------------------------------
   def __init__(self, id=None,
                name=None, ttl=None, rclass=None, type=None, content=None,
@@ -71,9 +74,9 @@ class Record(object):
       # TODO: port?...
       content  = rdata[2].to_text(),
     )
-    if ret.type == 'MX':
+    if ret.type == Record.TYPE_MX:
       ret.content = rdata[2].exchange.to_text()
-    elif ret.type == 'TXT':
+    elif ret.type == Record.TYPE_TXT:
       # todo: is this how they should all be done?...
       ret.content = ' '.join(rdata[2].strings)
     return ret
@@ -86,7 +89,7 @@ class Record(object):
   def toText(self):
     fmt = FORMATS.get(self.type) or FORMATS.get('*')
     dat = self.toDict()
-    if dat.type == 'TXT':
+    if dat.type == Record.TYPE_TXT:
       dat.content = escapeContent(dat.content)
     return fmt.format(**dat)
 
