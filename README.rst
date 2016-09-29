@@ -65,9 +65,19 @@ To upload a zone:
 And to show differences between the hosted zone and the local
 zonefile:
 
-.. code-block:: bash
+.. code:: bash
 
   $ dnssync diff --config config.ini
+
+
+And to test that a DNS server is serving the zone as specified:
+
+.. code:: bash
+
+  $ dnssync verify --config config.ini
+
+Note that the ``verify`` command has some limitations in how accurate
+it can be. For example, a wildcard record cannot be tested explicitly.
 
 
 Configuration
