@@ -78,7 +78,9 @@ class Driver(api.Driver):
     resp = self.session.get(self.BASEURL + '/members/domainlist/js/')
     return dict((absdom(zname), int(zid))
                 for zid, zname in
-                [zone.split(':', 1) for zone in resp.text.split('|')])
+                [zone.strip().split(':', 1)
+                 for zone in resp.text.split('|')
+                 if zone.strip()])
 
   #----------------------------------------------------------------------------
   def _switchToZone(self, name):
