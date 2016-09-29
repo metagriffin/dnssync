@@ -56,8 +56,19 @@ class Driver(api.Driver):
     for attr in ('username', 'password'):
       if not self.params.get(attr):
         raise api.ConfigurationError(_('required parameter "{}" missing', attr))
-    self.session = requests.Session()
-    resp = self.session.post(
+    self._session = None
+
+  #----------------------------------------------------------------------------
+  @property
+  def session(self):
+    if self._session is None:
+      self._session = requests.Session()
+      self._login()
+    return self._session
+
+  #----------------------------------------------------------------------------
+  def _login(self):
+    resp = self._session.post(
       self.BASEURL + '/login/',
       allow_redirects = False,
       data = {
