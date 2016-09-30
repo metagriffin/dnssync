@@ -82,6 +82,12 @@ class Record(object):
     return ret
 
   #----------------------------------------------------------------------------
+  def update(self, **kw):
+    for key, val in kw.items():
+      setattr(self, key, val)
+    return self
+
+  #----------------------------------------------------------------------------
   def toDict(self):
     return aadict(self.__dict__)
 
