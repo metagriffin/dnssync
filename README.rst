@@ -9,8 +9,9 @@ provider does not directly support that.
 
 Currently supported DNS service providers:
 
-* `PowerDNS <http://powerdns.net/>`_
 * `DomainMonster <http://domainmonster.com/>`_
+* `PowerDNS <http://powerdns.net/>`_
+* `ZoneEdit <http://zoneedit.com/>`_
 
 
 Project
@@ -43,7 +44,7 @@ e.g. ``config.ini``:
 
 .. code:: ini
 
-  driver        = powerdns 
+  driver        = powerdns
   apikey        = {KEY}
   domain        = {DOMAIN}
   zonefile      = {ZONEFILE}
@@ -91,15 +92,17 @@ The dnssync configuration file can specify the following options:
   The driver for the specific DNS hosting service; currently supported
   values:
 
+  * ``domainmonster``: for DomainMonster.com
   * ``powerdns``: for PowerDNS.net
+  * ``zoneedit``: for ZoneEdit.com
 
 
-* ``domain``: 
+* ``domain``:
 
   The name of the zone to be operated on.
 
 
-* ``zonefile``: 
+* ``zonefile``:
 
   The filename of the local zone file. If specified in the
   configuration, it is taken to be relative to the configuration
@@ -107,29 +110,66 @@ The dnssync configuration file can specify the following options:
   to the current working directory.
 
 
-PowerDNS
---------
-
-The following options exist for the ``powerdns`` driver:
-
-* ``apikey``: 
-
-  The API access key provided by PowerDNS. Note that an account must
-  first be enabled (via the PowerDNS website) before it can be used.
-
-
 DomainMonster
 -------------
 
 The following options exist for the ``domainmonster`` driver:
 
-* ``username``: 
+* ``username``:
 
   The username of the account to log into DomainMonster with.
 
 * ``password``:
 
   The password of the specified `username` account.
+
+.. IMPORTANT::
+
+  The `domainmonster` driver uses HTML-scraping to operate on the
+  hosted zone. This means that it, unfortunately, is quite brittle and
+  may break if DomainMonster changes its HTML structure. If this
+  appears to be happening, please report it to
+  https://github.com/metagriffin/dnssync/issues and I'll fix it ASAP.
+
+
+PowerDNS
+--------
+
+The following options exist for the ``powerdns`` driver:
+
+* ``apikey``:
+
+  The API access key provided by PowerDNS. Note that an account must
+  first be enabled (via the PowerDNS website) before it can be used.
+
+.. IMPORTANT::
+
+  The PowerDNS service has, as of 2016/09/29, been end-of-lifed.  That
+  means that you need to already have an account and service purchased
+  to be able to use this driver.
+
+
+ZoneEdit
+--------
+
+The following options exist for the ``zoneedit`` driver:
+
+* ``username``:
+
+  The username of the account to log into ZoneEdit with.
+
+* ``password``:
+
+  The password of the specified `username` account.
+
+.. IMPORTANT::
+
+  The `zoneedit` driver uses HTML-scraping to operate on the hosted
+  zone (despite what ZoneEdit advertises, they do NOT have an API to
+  manage their DNS zones). This means that it, unfortunately, is quite
+  brittle and may break if ZoneEdit changes its HTML structure. If
+  this appears to be happening, please report it to
+  https://github.com/metagriffin/dnssync/issues and I'll fix it ASAP.
 
 
 Multiple Profiles
