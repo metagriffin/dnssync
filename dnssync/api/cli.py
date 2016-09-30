@@ -191,7 +191,7 @@ def main(args=None):
   common.add_argument(
     _('-D'), _('--driver'), metavar=_('DRIVERNAME'),
     dest='driver', default=None,
-    help=_('driver type (e.g. "powerdns", "domainmonster")'))
+    help=_('driver type (e.g. "zoneedit", "powerdns", "domainmonster")'))
 
   common.add_argument(
     _('-d'), _('--domain'), metavar=_('ZONENAME'),

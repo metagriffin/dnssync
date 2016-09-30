@@ -63,6 +63,7 @@ entrypoints = {
   'dnssync.services.plugins' : [
     'domainmonster      = dnssync.services.domainmonster:Driver',
     'powerdns           = dnssync.services.powerdns:Driver',
+    'zoneedit           = dnssync.services.zoneedit:Driver',
   ],
 }
 
