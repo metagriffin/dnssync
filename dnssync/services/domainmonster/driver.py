@@ -33,7 +33,7 @@ from six.moves.urllib import parse as urlparse
 import asset
 
 from dnssync import api
-from dnssync.api.util import absdom, reldom
+from dnssync.api.util import absdom
 from dnssync.api.i18n import _
 
 from . import parser
