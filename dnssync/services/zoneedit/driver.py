@@ -76,7 +76,7 @@ def ze2api(rawrec, name):
         refresh = 3600,
         retry   = 600,
         expire  = dur2sec(rawrec['Expire after']),
-        minttl  = dur2sec(rawrec['Minimum time to live']),
+        minttl  = dur2sec(rawrec['Default time to live']),
       ))
     return [ret]
   if rawrec.rtype == 'NS':
