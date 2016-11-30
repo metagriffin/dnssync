@@ -55,10 +55,13 @@ def dur2sec(text):
 
 #------------------------------------------------------------------------------
 def zeGetSerial(name):
-  sio = StringIO('nameserver ' + socket.gethostbyname('dns0.zoneedit.com.'))
-  res = dns.resolver.Resolver(sio)
-  ans = res.query(name, rdtype='SOA', rdclass='IN')
-  return ans.response.answer[0].items[0].serial
+  try:
+    sio = StringIO('nameserver ' + socket.gethostbyname('dns0.zoneedit.com.'))
+    res = dns.resolver.Resolver(sio)
+    ans = res.query(name, rdtype='SOA', rdclass='IN')
+    return ans.response.answer[0].items[0].serial
+  except dns.resolver.NoNameservers:
+    return None
 
 #------------------------------------------------------------------------------
 def ze2api(rawrec, name):
