@@ -39,7 +39,7 @@ test_dependencies = [
 ]
 
 dependencies = [
-  'iniherit             >= 0.1.7',
+  'iniherit             >= 0.3.4',
   'dnspython            >= 1.11.1',
   'six                  >= 1.6.1',
   'blessings            >= 1.5.1',
