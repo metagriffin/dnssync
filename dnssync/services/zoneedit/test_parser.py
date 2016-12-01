@@ -59,7 +59,7 @@ class TestParser(unittest.TestCase):
       parser.extract_records(html),
       [
         # SOA
-        {'rtype': 'SOA', 'Expire after': '1 week', 'Minimum time to live': '1 hour'},
+        {'rtype': 'SOA', 'Expire after': '1 week', 'Default time to live': '1 hour'},
 
         # NS
         {'rtype': 'NS', 'HOST': 'example.com', 'NAME SERVER(S)': 'LOCAL', 'TTL': 'default'},
