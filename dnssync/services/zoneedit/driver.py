@@ -75,8 +75,8 @@ def ze2api(rawrec, name):
         serial  = zeGetSerial(name) or int(time.time()),
         refresh = 3600,
         retry   = 600,
-        expire  = dur2sec(rawrec['Expire after']),
-        minttl  = dur2sec(rawrec['Default time to live']),
+        expire  = dur2sec(rawrec['EXPIRE AFTER']),
+        minttl  = dur2sec(rawrec['DEFAULT TIME TO LIVE']),
       ))
     return [ret]
   if rawrec.rtype == 'NS':
