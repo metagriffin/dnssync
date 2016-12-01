@@ -59,7 +59,7 @@ class TestParser(unittest.TestCase):
       parser.extract_records(html),
       [
         # SOA
-        {'rtype': 'SOA', 'Expire after': '1 week', 'Default time to live': '1 hour'},
+        {'rtype': 'SOA', 'EXPIRE AFTER': '1 week', 'DEFAULT TIME TO LIVE': '1 hour'},
 
         # NS
         {'rtype': 'NS', 'HOST': 'example.com', 'NAME SERVER(S)': 'LOCAL', 'TTL': 'default'},
@@ -73,7 +73,7 @@ class TestParser(unittest.TestCase):
         {'rtype': 'A', 'HOST': 'www.example.com', 'IP ADDRESS': '1.2.3.5', 'TTL': '600'},
 
         # AAAA
-        {'rtype': 'AAAA', 'HOST': 'localhost.example.com', 'IPv6 ADDRESS': '::1', 'TTL': '14400'},
+        {'rtype': 'AAAA', 'HOST': 'localhost.example.com', 'IPV6 ADDRESS': '::1', 'TTL': '14400'},
 
         # dynamic
         # TODO

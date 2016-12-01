@@ -61,11 +61,11 @@ def extract_records(text):
     if not rtype or rtype.string in (
         'subdomains', 'dynamic records', 'URL forwarding', 'stealth forwarding'):
       continue
-    rtype = str(rtype.split()[0])
+    rtype = str(rtype.split()[0]).upper()
     if rtype == 'SOA':
       section = section.find('tr', valign='top')
       cols = [
-        str(el.string).strip().split(':')[0]
+        str(el.string).strip().split(':')[0].upper()
         for el in section.find_all('td', align='right')]
       cells = [str(el.string).strip() for el in section.find_all('b')]
       rec = aadict(zip(cols, cells), rtype=rtype)
@@ -73,7 +73,8 @@ def extract_records(text):
       continue
     if rtype in ('NS', 'MX', 'A', 'AAAA', 'CNAME', 'SRV', 'TXT', 'NAPTR'):
       cols = [
-        str(el.string) for el in section.find('tr', valign='top').find_all('small')]
+        str(el.string).strip().upper()
+        for el in section.find('tr', valign='top').find_all('small')]
       rows = list(section.find_all('tr', valign='baseline', bgcolor=None))
       for record in rows:
         cells = [str(el.string).strip() for el in record.find_all(['b', 'i'])]
