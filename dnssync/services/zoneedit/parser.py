@@ -22,7 +22,7 @@
 import re
 
 from aadict import aadict
-from six.moves import html_parser
+import bs4
 
 from dnssync import api
 
@@ -43,137 +43,54 @@ class ScrapeError(api.DriverError): pass
 
 #------------------------------------------------------------------------------
 def extract_authdata(text):
+  # todo: use bs4...
   return {match.group(1): match.group(2)
           for match in _authdata_cre.finditer(text)}
 
 #------------------------------------------------------------------------------
 def extract_domains(text):
+  # todo: use bs4...
   return [match.group(1) for match in _domains_cre.finditer(text)]
 
 #------------------------------------------------------------------------------
-class MyRecordsParser(html_parser.HTMLParser):
-
-  # TODO: wouldn't this be better executed via xpath?...
-
-  def __init__(self, *args, **kw):
-    html_parser.HTMLParser.__init__(self, *args, **kw)
-    # super(MyRecordsParser, self).__init__(*args, **kw)
-    self.records = []
-    self.cursor  = []
-    self.curdat  = aadict()
-
-  def handle_starttag(self, tag, attrs):
-    attrs = dict(attrs)
-    if self.cursor == []:
-      if tag == 'td' and attrs == dict(align='left', width='395'):
-        self.cursor.append('section')
-        self.curdat.clear()
-        return
-      if tag == 'tr' and attrs == dict(valign='baseline', bgcolor='#e7e7e7'):
-        self.cursor.append('columns')
-        self.curdat.columns = []
-        return
-      if tag == 'tr' and attrs == dict(valign='baseline'):
-        self.cursor.append('record')
-        self.curdat.record = []
-        return
-    if self.cursor == ['section']:
-      if tag == 'font' and attrs == {'class': 'tableTitle1'}:
-        self.cursor.append('title1')
-        return
-      if tag == 'font' and attrs == {'class': 'tableTitle2'}:
-        self.cursor.append('title2')
-        return
-    if self.cursor == ['columns'] and tag == 'small':
-      self.cursor.append('name')
-      return
-    if self.cursor == ['record'] and tag == 'td' and 'colspan' in attrs:
-      self.cursor.append('no-value')
-      return
-    if self.cursor == ['record'] and tag == 'td' \
-        and self.curdat.rtype == 'SOA' and attrs.get('align') == 'right':
-      self.cursor.append('name')
-      return
-    if self.cursor == ['record'] and tag == 'td' \
-        and self.curdat.rtype == 'A' and len(self.curdat.record) == 1:
-      self.cursor.append('value')
-      return
-    if self.cursor == ['record'] and tag in ('b', 'i'):
-      self.cursor.append('value')
-      return
-
-  def handle_data(self, data):
-    if self.cursor in [
-        ['section', 'title1'],
-        ['section', 'title2'],
-        ['columns', 'name'],
-        ['record', 'name'],
-        ['record', 'value'],
-      ]:
-      self.curdat.text = ( self.curdat.text or '' ) + data
-
-  def handle_endtag(self, tag):
-    if self.cursor == ['section'] and tag == 'td':
-      self.cursor.pop()
-      if not self.curdat.title1 or not self.curdat.title1.endswith(' records'):
-        self.curdat.title1 = self.curdat.title2
-      if self.curdat.title1 and self.curdat.title1.endswith(' records'):
-        self.curdat.rtype = self.curdat.title1.rsplit(' ', 1)[0]
-      del self.curdat.text
-      del self.curdat.title1
-      del self.curdat.title2
-      return
-    if self.cursor == ['section', 'title1'] and tag == 'font':
-      self.curdat.title1 = self.curdat.text
-      del self.curdat.text
-      self.cursor.pop()
-      return
-    if self.cursor == ['section', 'title2'] and tag == 'font':
-      self.curdat.title2 = self.curdat.text
-      del self.curdat.text
-      self.cursor.pop()
-      return
-    if self.cursor == ['columns'] and tag == 'tr':
-      self.cursor.pop()
-      return
-    if self.cursor == ['columns', 'name'] and tag == 'small':
-      self.cursor.pop()
-      self.curdat.columns.append(self.curdat.text)
-      del self.curdat.text
-      return
-    if self.cursor == ['record'] and tag == 'tr':
-      self.cursor.pop()
-      if self.curdat.rtype and self.curdat.record:
-        rec = aadict(
-          zip(self.curdat.columns, [r.strip() for r in self.curdat.record]),
-          rtype=self.curdat.rtype)
-        if rec.rtype == 'SOA' and self.records and self.records[-1].rtype == 'SOA':
-          self.records[-1].update(rec)
-        else:
-          self.records.append(rec)
-        del self.curdat.record
-      return
-    if ( self.cursor == ['record', 'value'] and tag in ('b', 'i') ) or \
-          ( self.cursor == ['record', 'value'] and tag == 'td'
-            and self.curdat.rtype == 'A' and len(self.curdat.record) == 1 ) or \
-          ( self.cursor == ['record', 'name'] and tag == 'td'
-            and self.curdat.rtype == 'SOA' ):
-      if self.cursor == ['record', 'name']:
-        self.curdat.columns = [self.curdat.text.strip().split(':', 1)[0]]
-      else:
-        self.curdat.record.append(self.curdat.text)
-      self.cursor.pop()
-      del self.curdat.text
-      return
-    if self.cursor == ['record', 'no-value'] and tag == 'td':
-      self.cursor.pop()
-      return
-
-#------------------------------------------------------------------------------
 def extract_records(text):
-  parser = MyRecordsParser()
-  parser.feed(text)
-  return parser.records
+  soup = bs4.BeautifulSoup(text, 'html.parser')
+  records = []
+  for section in soup.select('.tableStart'):
+    rtype = section.select('.tableTitle2, .tableTitle1')[0].string
+    if not rtype or rtype.string in (
+        'subdomains', 'dynamic records', 'URL forwarding', 'stealth forwarding'):
+      continue
+    rtype = str(rtype.split()[0])
+    if rtype == 'SOA':
+      section = section.find('tr', valign='top')
+      cols = [
+        str(el.string).strip().split(':')[0]
+        for el in section.find_all('td', align='right')]
+      cells = [str(el.string).strip() for el in section.find_all('b')]
+      rec = aadict(zip(cols, cells), rtype=rtype)
+      records.append(rec)
+      continue
+    if rtype in ('NS', 'MX', 'A', 'AAAA', 'CNAME', 'SRV', 'TXT', 'NAPTR'):
+      cols = [
+        str(el.string) for el in section.find('tr', valign='top').find_all('small')]
+      rows = list(section.find_all('tr', valign='baseline', bgcolor=None))
+      for record in rows:
+        cells = [str(el.string).strip() for el in record.find_all(['b', 'i'])]
+        if len(cells) == 1 and len(rows) == 1 and len(cols) != 1:
+          # todo: double check that it says something linke:
+          #         "No {RECTYPE} records defined for {DOMAIN}."
+          continue
+        if rtype == 'A':
+          cells.insert(1, str(record.select('td:nth-of-type(2)')[0].string).strip())
+        if len(cols) != len(cells):
+          raise ScrapeError(
+            'fields did not match columns for %r record type' % (rtype,))
+        rec = aadict(zip(cols, cells), rtype=rtype)
+        records.append(rec)
+      continue
+    raise ScrapeError('unknown record type: %r' % (rtype,))
+  return records
 
 #------------------------------------------------------------------------------
 # end of $Id$
