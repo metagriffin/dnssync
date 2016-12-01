@@ -68,7 +68,7 @@ def ze2api(rawrec, name):
   ret = api.Record(name=name, rclass='IN', type=rawrec.rtype, ttl=dur2sec(rawrec.TTL))
   # TODO: handle type in 'dynamic', 'SRV', 'NAPTR'
   if rawrec.rtype == 'SOA':
-    # {'rtype': 'SOA', 'Expire after': '1 week', 'Minimum time to live': '1 hour'}
+    # {'rtype': 'SOA', 'EXPIRE AFTER': '1 week', 'DEFAULT TIME TO LIVE': '1 hour'}
     ret.update(
       ttl     = 3600,
       content = 'dns0.zoneedit.com. zone.zoneedit.com. {serial} {refresh} {retry} {expire} {minttl}'.format(
@@ -99,8 +99,8 @@ def ze2api(rawrec, name):
     # {'rtype': 'A', 'HOST': 'example.com', 'IP ADDRESS': '1.2.3.4', 'TTL': '14400'}
     return [ret.update(name=absdom(rawrec['HOST']), content=rawrec['IP ADDRESS'])]
   if rawrec.rtype == 'AAAA':
-    # {'rtype': 'AAAA', 'HOST': 'localhost.example.com', 'IPv6 ADDRESS': '::1', 'TTL': '14400'}
-    return [ret.update(name=absdom(rawrec['HOST']), content=rawrec['IPv6 ADDRESS'])]
+    # {'rtype': 'AAAA', 'HOST': 'localhost.example.com', 'IPV6 ADDRESS': '::1', 'TTL': '14400'}
+    return [ret.update(name=absdom(rawrec['HOST']), content=rawrec['IPV6 ADDRESS'])]
   if rawrec.rtype == 'CNAME':
     # {'rtype': 'CNAME', 'HOST': 'other2.example.com', 'ADDRESS': 'example.com', 'TTL': '600'}
     return [ret.update(name=absdom(rawrec['HOST']), content=absdom(rawrec['ADDRESS']))]
