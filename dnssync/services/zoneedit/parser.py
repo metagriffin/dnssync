@@ -86,12 +86,35 @@ def extract_records(text):
           cells.insert(1, str(record.select('td:nth-of-type(2)')[0].string).strip())
         if len(cols) != len(cells):
           raise ScrapeError(
-            'fields did not match columns for %r record type' % (rtype,))
+            _('fields did not match columns for "{}" record type', rtype))
         rec = aadict(zip(cols, cells), rtype=rtype)
         records.append(rec)
       continue
-    raise ScrapeError('unknown record type: %r' % (rtype,))
+    raise ScrapeError(_('unknown record type: "{}"', rtype))
   return records
+
+#------------------------------------------------------------------------------
+def extract_editparams(text):
+  soup = bs4.BeautifulSoup(text, 'html5lib')
+  params = {}
+  for tag in soup.find_all('input'):
+    if tag['name'] == 'next':
+      params['next.x'] = '40'
+      params['next.y'] = '9'
+      continue
+    if tag['name'] == 'confirm':
+      continue
+    if '::' not in tag['name']:
+      params[str(tag['name'])] = str(tag['value'])
+      continue
+    if tag.get('value') is None:
+      continue
+    params[str(tag['name'])] = str(tag['value'])
+  for tag in soup.find_all('select'):
+    opt = tag.select('option[selected]')
+    if opt:
+      params[str(tag['name'])] = str(opt[0]['value'])
+  return params
 
 #------------------------------------------------------------------------------
 # end of $Id$
