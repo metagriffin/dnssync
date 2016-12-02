@@ -1,0 +1,466 @@
+<HTML>
+<HEAD>
+<TITLE>ZoneEdit - Control Panel: Edit IPv6 Addresses</TITLE>
+<link rel="shortcut icon" type="image/x-icon" href="https://cp.zoneedit.com/images/favicon.ico" />      
+<link rel="icon" type="image/x-icon" href="https://cp.zoneedit.com/images/favicon.ico" />
+<LINK REL="STYLESHEET" HREF="https://cp.zoneedit.com/style.php">
+<script type="text/javascript">
+	var IMAGES_URL = "/";
+
+	// ActiveCampaign site tracking code
+	var trackcmp_email = '';
+	var trackcmp = document.createElement("script");
+	trackcmp.async = true;
+	trackcmp.type = 'text/javascript';
+	trackcmp.src = '//trackcmp.net/visit?actid=475026307&e='+encodeURIComponent(trackcmp_email)+'&r='+encodeURIComponent(document.referrer)+'&u='+encodeURIComponent(window.location.href);
+	var trackcmp_s = document.getElementsByTagName("script");
+	if (trackcmp_s.length) {
+		trackcmp_s[0].parentNode.appendChild(trackcmp);
+	} else {
+		var trackcmp_h = document.getElementsByTagName("head");
+		trackcmp_h.length && trackcmp_h[0].appendChild(trackcmp);
+	}
+</script>
+
+</HEAD>
+
+<BODY MARGINHEIGHT="0" MARGINWIDTH="0" TOPMARGIN="0" LEFTMARGIN="0"
+	BGCOLOR="#e1e8f5"
+	TEXT="#313131"
+	LINK="#eb7821"
+	ALINK="#8f8f8f"
+	VLINK="#eb7821"
+	><A NAME="TOP"></A>
+
+<!-- start header -->
+
+		<div id="wrapper" align="center">
+
+<TABLE ID="header_zone" BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="990" HEIGHT="80">
+
+<TR BGCOLOR="#2f475f">
+<TD VALIGN="middle">&nbsp; &nbsp; &nbsp; 
+<!--logo insert -->
+<a href="https://cp.zoneedit.com/"><img src="https://cp.zoneedit.com/images/zoneedit_by_easy_50.png" border="0" width="399" height="81" alt="ZoneEdit" title="ZoneEdit" /></a>
+</TD>
+<TD ALIGN="right" VALIGN="bottom" CLASS="pageHeader">
+</TD>
+<TD WIDTH="200" align="right" valign="middle">
+	<div id="member_meta_control">
+		<div class="buttons">
+			<button ID="buttonLogout" class="positive" type="button" onClick="javascript: document.location='/logout.php';">Log Out</button> 	
+		</div>
+	</div>
+</TR>
+
+
+</TABLE>
+
+<!-- end of logo header --->
+
+<!-- begin status bar --->
+
+<TABLE  CLASS="infobarbackground" BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="990" HEIGHT="23" >
+
+<TR BGCOLOR="">
+<TD HEIGHT="20" ALIGN="left" CLASS="pageHeaderInfo">
+ &nbsp; &nbsp; &nbsp; &nbsp; Logged in as <b>foo@example.com</b>&nbsp;<font color="#313131">&nbsp;|&nbsp;</font>&nbsp;Domain <b>example.com</b><BR>
+</TD>
+<TD ALIGN="right" CLASS="pageHeaderInfo"
+<b style="font-weight: bold;">Quick Start: <a href="/support/getting_started/" target="_new">User Videos</a></b>&nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp;<BR>
+</TD>
+</TR>
+<TR BGCOLOR=""><TD COLSPAN="2" HEIGHT="1"
+>
+<img src="https://cp.zoneedit.com/images/common/spacer.gif" border="0" width="1" height="1" alt="" /><BR>
+</TD></TR>
+
+<TR BGCOLOR="#e7e7e7">
+<TD COLSPAN="2" HEIGHT="1">
+<img src="https://cp.zoneedit.com/images/common/spacer.gif" border="0" width="1" height="1" alt="" /><BR>
+</TD>
+</TR>
+
+</TABLE>
+
+<!-- end of status bar --->
+
+
+<!-- end header -->
+
+<!-- start body -->
+
+<TABLE ID="customer_zone" BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="990" bgcolor="white">
+<TR VALIGN="top">
+<TD ID="menu_spacer" WIDTH="5">&nbsp;</TD>
+<TD ID="menu_zone" WIDTH="150" BGCOLOR="#ffffff" 
+ ALIGN="CENTER">
+
+<!-- start page_menu -->
+
+<img src="https://cp.zoneedit.com/images/common/menu/max_button.gif" border="0" width="20" height="20" alt="Show Menu" title="Show Menu" id="maxbtn" style="display:none" title="Show Menu" /><img src="https://cp.zoneedit.com/images/common/menu/min_button.gif" border="0" width="20" height="20" alt="Hide Menu" title="Hide Menu" id="minbtn" style="display:none" title="Hide Menu" /><!--whats this --> <table id="menu_home" class="menuTable" border="0" color="#000000" cellspacing="0" cellpadding="0" width="145">
+<tr valign="top" bgcolor="#eb7821">
+<td class="menuTitleCell"><b class="menuTitleOuter">Home</b></td><td class="mnuButton_home" class="min"><img src="https://cp.zoneedit.com/images/common/menu/min_button.gif" border="0" width="20" height="20" id="minbtn_home" class="maxBtn maximize" title="" /></td>
+</tr>
+<tr class="menuRow menu_0">
+<td colspan="2" class="menuItemOuter"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/credits/start.php" target="_top" class="menuItemOuter" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="buy credits">Buy Credits</a></div></td>
+</tr>
+<tr class="menuRow menu_0">
+<td colspan="2" class="menuItemOuter"><div class="menuBox" style="padding: 0;">
+<a href="/signup/" target="_top" class="menuItemOuter" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="Buy Domain Names">Buy Domain Names</a></div></td>
+</tr>
+<tr class="menuRow menu_0">
+<td colspan="2" class="menuItemOuter"><div class="menuBox" style="padding: 0;">
+<a href="/signup/" target="_top" class="menuItemOuter" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="Add a domain">Add a Domain</a></div></td>
+</tr>
+<tr class="menuRow menu_0">
+<td colspan="2" class="menuItemOuter"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/domains/add-ons/?l=add-ons" target="_top" class="menuItemOuter" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="Add a domain">Domain Add-ons</a></div></td>
+</tr>
+<tr class="menuRow menu_0">
+<td colspan="2" class="menuItemOuter"><div class="menuBox" style="padding: 0;">
+<a href="/support/request.php" target="_top" class="menuItemOuter" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="Submit a support request">Get Support</a></div></td>
+</tr>
+<tr class="menuRow menu_0">
+<td colspan="2" class="menuItemOuter"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/home/" target="_top" class="menuItemOuter" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="Go to the Member home page">Member Home</a></div></td>
+</tr>
+</table>
+<img src="https://cp.zoneedit.com/images/common/menu/max_button.gif" border="0" width="20" height="20" alt="Show Menu" title="Show Menu" id="maxbtn" style="display:none" title="Show Menu" /><img src="https://cp.zoneedit.com/images/common/menu/min_button.gif" border="0" width="20" height="20" alt="Hide Menu" title="Hide Menu" id="minbtn" style="display:none" title="Hide Menu" /><!--whats this --> <table id="menu_manage" class="menuTable" border="0" color="#000000" cellspacing="0" cellpadding="0" width="145">
+<tr valign="top" bgcolor="#eb7821">
+<td class="menuTitleCell"><b class="menuTitleOuter">Manage</b></td><td class="mnuButton_manage" class="min"><img src="https://cp.zoneedit.com/images/common/menu/min_button.gif" border="0" width="20" height="20" id="minbtn_manage" class="maxBtn maximize" title="" /></td>
+</tr>
+<tr class="menuRow menu_1">
+<td colspan="2" class="menuItemOuter"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/domains/" target="_top" class="menuItemOuter" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="manage your domains">Domains</a></div></td>
+</tr>
+<tr class="menuRow menu_1">
+<td colspan="2" class="menuItemOuter">
+<img src="https://cp.zoneedit.com/images/common/menu/max_button.gif" border="0" width="20" height="20" alt="Show Menu" title="Show Menu" id="maxbtn" style="display:none" title="Show Menu" /><img src="https://cp.zoneedit.com/images/common/menu/min_button.gif" border="0" width="20" height="20" alt="Hide Menu" title="Hide Menu" id="minbtn" style="display:none" title="Hide Menu" /><!--whats this --> <table id="menu_example.com" class="menuTable" border="0" color="#000000" cellspacing="0" cellpadding="0" width="139">
+<tr valign="top" bgcolor="#2f475f">
+<td class="menuTitleCell"><b class="menuTitleInner"><a href="https://cp.zoneedit.com/manage" style="text-decoration: none; color: #ffffff">example.com</a></td><td class="mnuButton_example.com" class="min"><img src="https://cp.zoneedit.com/images/common/menu/min_button.gif" border="0" width="20" height="20" id="minbtn_example.com" class="maxBtn maximize" title="" /></td>
+</tr>
+<tr class="menuRow menu_2">
+<td colspan="2" class="menuItemInner"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/domains/" target="_top" class="menuItemInner" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="view/edit domain information and DNS settings for example.com">Domain Overview</a></div></td>
+</tr>
+<tr class="menuRow menu_2">
+<td colspan="2" class="menuItemInner"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/domains/zone/" target="_top" class="menuItemInner" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="view/edit DNS settings for example.com">DNS Settings</a></div></td>
+</tr>
+<tr class="menuRow menu_2">
+<td colspan="2" class="menuItemInner"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/domains/monitors/" target="_top" class="menuItemInner" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="view/edit Host Monitoring and Failover settings for example.com">Monitoring &amp; Failover</a></div></td>
+</tr>
+<tr class="menuRow menu_2">
+<td colspan="2" class="menuItemInner"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/domains/info/" target="_top" class="menuItemInner" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="view/edit domain information for example.com">Domain Info</a></div></td>
+</tr>
+<tr class="menuRow menu_2">
+<td colspan="2" class="menuItemInner"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/domains/index.php?LOGOUT=1" target="_top" class="menuItemInner" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="stop managing example.com">Close</a></div></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr class="menuRow menu_2">
+<td colspan="2" class="menuItemOuter">
+<img src="https://cp.zoneedit.com/images/common/menu/max_button.gif" border="0" width="20" height="20" alt="Show Menu" title="Show Menu" id="maxbtn" style="display:none" title="Show Menu" /><img src="https://cp.zoneedit.com/images/common/menu/min_button.gif" border="0" width="20" height="20" alt="Hide Menu" title="Hide Menu" id="minbtn" style="display:none" title="Hide Menu" /><!--whats this --> <table id="menu_foo@example.com" class="menuTable" border="0" color="#000000" cellspacing="0" cellpadding="0" width="139">
+<tr valign="top" bgcolor="#2f475f">
+<td class="menuTitleCell"><b class="menuTitleInner">foo@example.com</b></td><td class="mnuButton_foo@example.com" class="min"><img src="https://cp.zoneedit.com/images/common/menu/min_button.gif" border="0" width="20" height="20" id="minbtn_foo@example.com" class="maxBtn maximize" title="" /></td>
+</tr>
+<tr class="menuRow menu_3">
+<td colspan="2" class="menuItemInner"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/users/info/" target="_top" class="menuItemInner" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="view/edit my user information">Your Info</a></div></td>
+</tr>
+<tr class="menuRow menu_3">
+<td colspan="2" class="menuItemInner"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/users/prefs/" target="_top" class="menuItemInner" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="view/edit my site preferences">Preferences</a></div></td>
+</tr>
+<tr class="menuRow menu_3">
+<td colspan="2" class="menuItemInner"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/users/portfolio/" target="_top" class="menuItemInner" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="view/edit my domain portfolios">Domain Portfolios</a></div></td>
+</tr>
+<tr class="menuRow menu_3">
+<td colspan="2" class="menuItemInner"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/security/" target="_top" class="menuItemInner" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="manage your security settings">Security</a></div></td>
+</tr>
+<tr class="menuRow menu_3">
+<td colspan="2" class="menuItemInner"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/users/delete_my_account.php" target="_top" class="menuItemInner" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="delete your account and all its domains">Delete My Account</a></div></td>
+</tr>
+</table>
+</td>
+</tr>
+<tr class="menuRow menu_3">
+<td colspan="2" class="menuItemOuter"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/credits/" target="_top" class="menuItemOuter" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="manage your credits">Credits</a></div></td>
+</tr>
+<tr class="menuRow menu_3">
+<td colspan="2" class="menuItemOuter"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/ssl_certificates/" target="_top" class="menuItemOuter" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="manage your SSL certificates">SSL Certificates</a></div></td>
+</tr>
+<tr class="menuRow menu_3">
+<td colspan="2" class="menuItemOuter"><div class="menuBox" style="padding: 0;">
+<a href="https://cp.zoneedit.com/manage/invoices/" target="_top" class="menuItemOuter" style="display:block; cursor:pointer; padding: 10px 6px 10px 8px;" title="manage your invoices">Invoices</a></div></td>
+</tr>
+</table>
+
+
+
+<BR><BR>
+
+<!-- end page_menu -->
+
+</TD>
+
+<TD WIDTH="1" BGCOLOR="#ffffff">
+<img src="https://cp.zoneedit.com/images/common/spacer.gif" border="0" width="1" height="1" alt="" /><BR>
+</TD>
+
+<TD WIDTH="770">
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="10" WIDTH="770">
+<TR VALIGN="top">
+<TD CLASS="pageInner">
+
+
+<!-- start page_inner -->
+
+<h1>Edit IPv6 Addresses</h1>
+<p>
+<b>AAAA records</b> map host names to IPv6 addresses. You can have more than one entry per host to activate round-robin service for that host.
+</p>
+
+<p>
+Enter an at-sign (i.e. "@") on the left to indicate an IPv6 address for the root domain (e.g. "example.com"), or an asterisk (i.e. "*") to indicate a wild-card IPv6 address for your domain.
+</p>
+
+<p>
+When you have finished editing the domain information below, click on the <span class="greenbutton">[ next ]</span> button.
+</p>
+
+<FORM METHOD="POST" ACTION="/manage/domains/ipv6/edit.php" onReset="return confirm('Do you want to reset all fields to their starting values?');"><INPUT TYPE="hidden" NAME="MODE" VALUE="edit">
+<!-- ----- start of table: IPv6 Addresses ----- -->
+
+<TABLE BORDER="0" WIDTH="750" 
+    CELLSPACING="0" CELLPADDING="0" 
+    BGCOLOR="#afb6d3">
+
+<TR>
+<TD COLSPAN="2"><img src="https://cp.zoneedit.com/images/common/spacer.gif" border="0" width="750" height="1" alt="" /><BR></TD>
+</TR>
+
+<TR VALIGN="top">
+<TD><img src="https://cp.zoneedit.com/images/common/spacer.gif" border="0" width="1" height="1" alt="" /><BR></TD>
+<TD>
+
+<TABLE BORDER="0" WIDTH="749"
+	CELLSPACING="0" CELLPADDING="3"
+	BGCOLOR="#ffffff"  CLASS="tableStart">
+
+
+<TR VALIGN="middle" BGCOLOR="#2f475f">
+<TD ALIGN="left" WIDTH="395">
+<FONT CLASS="tableTitle1">IPv6 Addresses</font>&nbsp;<font class="tableTitle2">AAAA records</FONT><BR>
+</TD>
+<TD ALIGN="right" WIDTH="58">
+<a href="javascript:quickHelp('IPv6 Addresses');" class="helpBtnLink"><img src="https://cp.zoneedit.com/images/common/b_help_white.gif" border="0" width="15" height="15" alt="Click to find out what this section means" title="Click to find out what this section means" class="helpBtn" vspace="1" hspace="4" style="background-color: #FFFFFF;" onMouseOver="oldBG=this.style.backgroundColor; this.style.backgroundColor='#2f475f';"  onMouseOut="this.style.backgroundColor=oldBG;"  /></a>
+</TD>
+</TR>
+
+
+
+<TR VALIGN="top">
+<TD COLSPAN="2" ALIGN="left" WIDTH="749">
+
+<!-- ----- start of inside: IPv6 Addresses ----- -->
+
+
+<table border="0" cellpadding="0" cellspacing="4" width="743">
+<TR VALIGN="baseline" BGCOLOR="#e7e7e7">
+<TD WIDTH="45%">&nbsp;<SMALL>HOST</SMALL><BR></TD>
+<TD>&nbsp;<SMALL>IPv6 ADDRESS</SMALL><BR></TD>
+<td width="5%">&nbsp;<small>TTL</small>&nbsp;<br /></td><TD WIDTH="5%">&nbsp;<SMALL>DEL</SMALL>&nbsp;<BR></TD>
+</TR>
+<TR VALIGN="baseline">
+<TD valign="top" WIDTH="45%">
+&nbsp;<INPUT TYPE="TEXT" NAME="IPV6::0::host" SIZE="35" MAXLENGTH="255">.example.com<BR>
+</TD>
+<TD valign="top" nowrap>
+&nbsp;<INPUT TYPE="TEXT" NAME="IPV6::0::ip" SIZE="45"><BR>
+</TD>
+<td nowrap><input type="text" name="IPV6::0::ttl" size="2" maxlength="8" /> sec<br /></td><td><br /></td></tr>
+<TR VALIGN="baseline">
+<TD valign="top" WIDTH="45%">
+&nbsp;<INPUT TYPE="TEXT" NAME="IPV6::1::host" SIZE="35" MAXLENGTH="255">.example.com<BR>
+</TD>
+<TD valign="top" nowrap>
+&nbsp;<INPUT TYPE="TEXT" NAME="IPV6::1::ip" SIZE="45"><BR>
+</TD>
+<td nowrap><input type="text" name="IPV6::1::ttl" size="2" maxlength="8" /> sec<br /></td><td><br /></td></tr>
+<TR VALIGN="baseline">
+<TD valign="top" WIDTH="45%">
+&nbsp;<INPUT TYPE="TEXT" NAME="IPV6::2::host" SIZE="35" MAXLENGTH="255">.example.com<BR>
+</TD>
+<TD valign="top" nowrap>
+&nbsp;<INPUT TYPE="TEXT" NAME="IPV6::2::ip" SIZE="45"><BR>
+</TD>
+<td nowrap><input type="text" name="IPV6::2::ttl" size="2" maxlength="8" /> sec<br /></td><td><br /></td></tr>
+<TR VALIGN="baseline">
+<TD valign="top" WIDTH="45%">
+&nbsp;<INPUT TYPE="TEXT" NAME="IPV6::3::host" SIZE="35" MAXLENGTH="255">.example.com<BR>
+</TD>
+<TD valign="top" nowrap>
+&nbsp;<INPUT TYPE="TEXT" NAME="IPV6::3::ip" SIZE="45"><BR>
+</TD>
+<td nowrap><input type="text" name="IPV6::3::ttl" size="2" maxlength="8" /> sec<br /></td><td><br /></td></tr>
+<TR VALIGN="baseline">
+<TD valign="top" WIDTH="45%">
+&nbsp;<INPUT TYPE="TEXT" NAME="IPV6::4::host" SIZE="35" MAXLENGTH="255">.example.com<BR>
+</TD>
+<TD valign="top" nowrap>
+&nbsp;<INPUT TYPE="TEXT" NAME="IPV6::4::ip" SIZE="45"><BR>
+</TD>
+<td nowrap><input type="text" name="IPV6::4::ttl" size="2" maxlength="8" /> sec<br /></td><td><br /></td></tr>
+</table>
+<!-- ----- end of inside start of table_end.tpf  ----- -->
+
+</TD>
+</TR>
+
+
+</TABLE>
+
+</TD>
+</TR>
+
+<TR>
+<TD COLSPAN="2"><img src="https://cp.zoneedit.com/images/common/spacer.gif" border="0" width="750" height="1" alt="" /><BR></TD>
+</TR>
+
+</TABLE>
+
+<!-- ----- end of of table_end.tpf ----- -->
+
+
+<!-- start tableForm in layout.php -->
+
+<br />
+<input type="hidden" id="csrf_token" name="csrf_token" value="1234567890" /><table border="0" width="752" cellpadding="2" cellspacing="0">
+<tr><td width="0">
+<table border="0" width="0" cellpadding="1" cellspacing="0" bgcolor="#afb6d3"><tr><td bgcolor="#afb6d3"><table border="0" width="0" cellpadding="0" cellspacing="0" bgcolor="#E1E1E1">
+<tr class="buttonRow" width="80" bgcolor="#E1E1E1"><td class="buttonCell" align="right" onMouseOver="oldBG=this.style.backgroundColor; this.style.backgroundColor='Black';"  onMouseOut="this.style.backgroundColor=oldBG;" >
+<a href="javascript:history.back();"><img src="https://cp.zoneedit.com/images/common/fb_back_white.gif" border="0" width="80" height="15" alt="back" title="back" name="back" /></a></td></tr></table></td></tr>
+</table>
+</td>
+
+<td width="100%">&nbsp;</td>
+<td width="0">
+<table border="0" width="0" cellpadding="1" cellspacing="0" bgcolor="#afb6d3"><tr><td bgcolor="#afb6d3"><table border="0" width="0" cellpadding="0" cellspacing="0" bgcolor="#E1E1E1">
+<tr class="buttonRow" width="80" bgcolor="#E1E1E1"><td class="buttonCell" align="right" onMouseOver="oldBG=this.style.backgroundColor; this.style.backgroundColor='Black';"  onMouseOut="this.style.backgroundColor=oldBG;" >
+<input type="image" src="https://cp.zoneedit.com/images/common/fb_next_white.gif" border="0" width="80" height="15" alt="next" title="next" name="next" class="positive" id="next"  /></td></tr></table></td></tr>
+</table>
+</td>
+</tr>
+</table><br />
+
+<!-- end tableForm layout.php-->
+
+</FORM>
+<BR>
+<br />
+<!-- end page_inner -->
+</TD>
+</TR>
+</TABLE>
+</TD>
+</TR>
+</TABLE>
+<!-- end body -->
+<!-- start page_footer -->
+<!-- this is common_footer.tpf -->
+
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="990">
+<TR BGCOLOR="#e7e7e7">
+<TD>
+<img src="https://cp.zoneedit.com/images/common/spacer.gif" border="0" width="2" height="2" alt="" /><BR>
+</TD>
+</TR>
+</TABLE>
+
+<TABLE ID="footer_zone" BORDER="0" CELLSPACING="0" CELLPADDING="6" WIDTH="990">
+
+<TR VALIGN="top" BGCOLOR="#ffffff">
+
+<TD WIDTH="100%"
+><SMALL>
+Copyright 2014 - 2016 easyZone Acquisition Corp.<BR>All rights reserved.<BR>
+</SMALL></TD>
+
+</TR>
+</TABLE>
+<!-- <p id="gentime">Generated in 0.053 second(s)</p> -->
+<!-- end page_footer -->
+<BR>
+</BODY>
+
+<SCRIPT LANGUAGE="Javascript" TYPE="text/javascript" SRC="https://cp.zoneedit.com/popup.js"></SCRIPT>
+<SCRIPT LANGUAGE="Javascript" TYPE="text/javascript" SRC="https://cp.zoneedit.com/waiting.js"></SCRIPT>
+<SCRIPT LANGUAGE="Javascript" TYPE="text/javascript" SRC="https://cp.zoneedit.com/locale.js"></SCRIPT>
+
+
+
+	<!-- begin javascript includes -->
+
+	<script type="text/javascript" src="/js/live/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="/js/live/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="/js/live/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="/js/live/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/js/live/jquery.dimensions.js"></script>
+	<script type="text/javascript" src="/js/live/jquery.modal.js"></script>
+	<script type="text/javascript" src="/js/live/jquery.validate.js"></script>
+	<script type="text/javascript" src="/js/live/jquery.browserblacklist.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.common.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.debug.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.bucket.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.message.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.lookup.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.page.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.util.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.form.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.ajax.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.menu.js"></script>
+	<script type="text/javascript" src="/js/live/easydns.social_share.js"></script>
+	<script type="text/javascript">
+		var IMAGES_URL = "https://cp.zoneedit.com/images/common/";
+	</script>
+
+
+	<!-- end javascript includes -->
+
+
+<script type="text/javascript">
+var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(100777489);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/100777489ns.gif" /></p></noscript>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53626649-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</HTML>

@@ -60,41 +60,83 @@ class TestParser(unittest.TestCase):
       [
         # SOA
         {'rtype': 'SOA', 'EXPIRE AFTER': '1 week', 'DEFAULT TIME TO LIVE': '1 hour'},
-
         # NS
         {'rtype': 'NS', 'HOST': 'example.com', 'NAME SERVER(S)': 'LOCAL', 'TTL': 'default'},
-
         # MX
         {'rtype': 'MX', 'MAIL FOR ZONE': 'example.com', 'MAIL SERVER': 'mail.example.com',
          'PREF': '10', 'TTL': '14400'},
-
         # A
         {'rtype': 'A', 'HOST': 'example.com', 'IP ADDRESS': '1.2.3.4', 'TTL': '14400'},
         {'rtype': 'A', 'HOST': 'www.example.com', 'IP ADDRESS': '1.2.3.5', 'TTL': '600'},
-
         # AAAA
         {'rtype': 'AAAA', 'HOST': 'localhost.example.com', 'IPV6 ADDRESS': '::1', 'TTL': '14400'},
-
         # dynamic
         # TODO
         # {'rtype': 'dynamic', 'HOST': '??', 'CURRENT IP ADDRESS': '1.2.3.6', 'TTL': '??'},
-
         # CNAME
         {'rtype': 'CNAME', 'HOST': 'other1.example.com', 'ADDRESS': 'www.example.com', 'TTL': '14400'},
         {'rtype': 'CNAME', 'HOST': 'other2.example.com', 'ADDRESS': 'example.com', 'TTL': '600'},
-
         # SRV
         # TODO
         # {'rtype': 'SRV', 'SERVICE': '??', 'PROTO': '??', 'HOST': '??', 'PRI': '??', 'WGT': '??', 'PORT': '??', 'TARGET': '??', 'TTL': '??'},
-
         # TXT
         {'rtype': 'TXT', 'HOST': 'example.com', 'TEXT': 'v=spf1 a mx ~all', 'TTL': '14400'},
-
         # NAPTR
         # TODO
         # {'rtype': 'NAPTR', 'HOST': '??', 'ORDER': '??', 'PREF': '??', 'FLAGS': '??', 'SERVICENAME': '??', 'REGEX': '??', 'REPLACEMENT': '??', 'TTL': '??'},
-
       ])
+
+  #----------------------------------------------------------------------------
+  def test_extract_editparams(self):
+    self.assertEqual(
+      parser.extract_editparams(self.getData('edit-a.html')),
+      {
+        'MODE'                  : 'edit',
+        'csrf_token'            : '1234567890',
+        'next.x'                : '40',
+        'next.y'                : '9',
+        'A::0::host'            : '@',
+        'A::0::ip'              : 'PARK',
+        'A::0::ttl'             : '',
+        'A::0::del'             : '1',
+        'A::0::revoked'         : '0',
+        'A::0::zone_id'         : '11409347',
+        'A::1::host'            : 'localhost',
+        'A::1::ip'              : '127.0.0.1',
+        'A::1::ttl'             : '',
+        'A::1::del'             : '1',
+        'A::1::revoked'         : '0',
+        'A::1::zone_id'         : '11410061',
+      })
+    self.assertEqual(
+      parser.extract_editparams(self.getData('edit-soa.html')),
+      {
+        'MODE'                  : 'edit',
+        'csrf_token'            : '1234567890',
+        'next.x'                : '40',
+        'next.y'                : '9',
+        'SOA::refresh'          : '3600',
+        'SOA::retry'            : '600',
+        'SOA::expire'           : '604800',
+        'SOA::ttl'              : '300',
+      })
+    self.assertEqual(
+      parser.extract_editparams(self.getData('edit-srv.html')),
+      {
+        'MODE'                  : 'edit',
+        'csrf_token'            : '1234567890',
+        'next.x'                : '40',
+        'next.y'                : '9',
+      })
+
+  #----------------------------------------------------------------------------
+  def test_extract_confirmparams(self):
+    self.assertEqual(
+      parser.extract_editparams(self.getData('confirm-a.html')),
+      {
+        'csrf_token'            : '1234567890',
+        'NEW_A'                 : '0987654321',
+      })
 
 #------------------------------------------------------------------------------
 # end of $Id$
