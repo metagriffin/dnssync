@@ -3,6 +3,21 @@ ChangeLog
 =========
 
 
+v0.2.6
+======
+
+* Added ZoneEdit record update/delete support
+
+
+v0.2.5
+======
+
+* Added ZoneEdit support (read-only)
+* Moved to asset-based plugin loading for service providers
+* Added "${ENV:NAME}" expansion support to config files
+* Added direct-from-DNS zone verification
+
+
 v0.2.4
 ======
 
