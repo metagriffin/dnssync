@@ -42,8 +42,17 @@ def escapeContent(text):
 #------------------------------------------------------------------------------
 class Record(object):
 
+  TYPE_SOA              = 'SOA'
+  TYPE_NS               = 'NS'
+  TYPE_A                = 'A'
+  TYPE_AAAA             = 'AAAA'
+  TYPE_CNAME            = 'CNAME'
   TYPE_MX               = 'MX'
   TYPE_TXT              = 'TXT'
+  TYPE_SRV              = 'SRV'
+  TYPE_NAPTR            = 'NAPTR'
+
+  TYPES = [locals()[key] for key in locals().keys() if key.startswith('TYPE_')]
 
   #----------------------------------------------------------------------------
   def __init__(self, id=None,
@@ -70,8 +79,17 @@ class Record(object):
       rclass   = dns.rdataclass.to_text(rdata[2].rdclass),
       type     = str(dns.rdatatype.to_text(rdata[2].rdtype)),
       priority = getattr(rdata[2], 'preference', None),
-      # TODO: weight?...
-      # TODO: port?...
+      # TODO: for SRV (and others?) records:
+      #         - service?
+      #         - proto?
+      #         - weight?
+      #         - port?
+      #         - target?
+      # TODO: for NAPTR (and others?) records:
+      #         - order?
+      #         - flags?
+      #         - regex?
+      #         - replacement?
       content  = rdata[2].to_text(),
     )
     if ret.type == Record.TYPE_MX:
