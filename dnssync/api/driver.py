@@ -121,20 +121,18 @@ class Driver(object):
     by returning an object with numeric `created`, `updated`, and
     `deleted` attributes.
     '''
-    res = aadict(created=0, updated=0, deleted=0)
     context = self.makePutContext(name, zone)
+    creates = []
+    updates = {}
+    deletes = []
+    records = context.records[:]
     for record in context.newrecords:
       match  = self._matchRecord(context, record)
       if not match:
-        log.info('adding %s record: %s (%s)', record.type, record.name, record.content)
-        self.createRecord(context, record)
-        res.created += 1
+        creates.append(record)
       else:
-        context.records.remove(match)
-        if match.ttl == record.ttl \
-            and match.content == record.content \
-            and match.priority == record.priority:
-          # todo: anything else?...
+        records.remove(match)
+        if not self._recordChanged(match, record):
           continue
         if match.type == 'SOA':
           mseq = int(match.content.split(' ')[2])
@@ -143,14 +141,42 @@ class Driver(object):
             log.error(
               'refusing to update SOA record (serial %r is less than %r)', useq, mseq)
             continue
-            log.info('updating %s record: %s (%s)', record.type, record.name, record.content)
-        self.updateRecord(context, record, match)
-        res.updated += 1
-    for record in context.records:
+        updates[match] = record
+    for record in records:
+      deletes.append(record)
+    return self.putChanges(context, creates, updates, deletes)
+
+  #----------------------------------------------------------------------------
+  def putChanges(self, context, creates, updates, deletes):
+    types = {}
+    for record in creates:
+      if record.type not in types:
+        types[record.type] = aadict(creates=[], updates={}, deletes=[])
+      types[record.type].creates.append(record)
+    for record, newrecord in updates.items():
+      if record.type not in types:
+        types[record.type] = aadict(creates=[], updates={}, deletes=[])
+      types[record.type].updates[record] = newrecord
+    for record in deletes:
+      if record.type not in types:
+        types[record.type] = aadict(creates=[], updates={}, deletes=[])
+      types[record.type].deletes.append(record)
+    for rtype, params in types.items():
+      self.putChangesByType(context, rtype, **params)
+    return aadict(
+      created=len(creates), updated=len(updates), deleted=len(deletes))
+
+  #----------------------------------------------------------------------------
+  def putChangesByType(self, context, rtype, creates, updates, deletes):
+    for record in creates:
+      log.info('creating %s record: %s (%s)', record.type, record.name, record.content)
+      self.createRecord(context, record)
+    for record, newrecord in updates.items():
+      log.info('updating %s record: %s (%s)', record.type, record.name, newrecord.content)
+      self.updateRecord(context, record, newrecord)
+    for record in deletes:
       log.info('deleting %s record: %s (%s)', record.type, record.name, record.content)
       self.deleteRecord(context, record)
-      res.deleted += 1
-    return res
 
   #----------------------------------------------------------------------------
   def _matchRecord(self, context, record):
@@ -161,7 +187,9 @@ class Driver(object):
                if rec.rclass == record.rclass
                  and rec.type == record.type
                  and rec.priority == record.priority
-                 and rec.name == record.name]
+                 and rec.name == record.name
+               # todo: what about SRV and NAPTR records... add more?...
+    ]
     if len(records) > 1:
       # todo: are MX and NS records really the only ones that can be multiple?...
       if record.type not in ('MX', 'NS'):
@@ -177,11 +205,21 @@ class Driver(object):
         type=record.type, content=record.content))
 
   #----------------------------------------------------------------------------
+  def _recordChanged(self, record, newrecord):
+    if record.ttl == newrecord.ttl \
+        and record.content == newrecord.content \
+        and record.priority == newrecord.priority:
+      # todo: anything else?... eg. for SRV and NAPTR records...
+      #       ie. weight, proto, port, etc.
+      return False
+    return True
+
+  #----------------------------------------------------------------------------
   def createRecord(self, context, record):
     raise NotImplementedError()
 
   #----------------------------------------------------------------------------
-  def updateRecord(self, context, record, oldrecord):
+  def updateRecord(self, context, record, newrecord):
     raise NotImplementedError()
 
   #----------------------------------------------------------------------------

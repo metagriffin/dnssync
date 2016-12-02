@@ -224,16 +224,16 @@ class Driver(api.Driver):
         _('could not {} record {}/{}: {}', action, record.name, record.type, ret.message))
 
   #----------------------------------------------------------------------------
-  def updateRecord(self, context, record, oldrecord):
-    rid  = str(oldrecord.id)
+  def updateRecord(self, context, record, newrecord):
+    rid  = str(record.id)
     data = dict(action='updatedns')
-    data['dns_content_' + rid]  = record.content
-    if record.type in ('MX', 'SRV'):
-      data['dns_pref_' + rid]   = record.priority
-    if record.type == 'SRV':
-      data['dns_weight_' + rid] = record.weight
-      data['dns_port_' + rid]   = record.port
-    self._postDnsAction(record, 'update', data)
+    data['dns_content_' + rid]  = newrecord.content
+    if newrecord.type in ('MX', 'SRV'):
+      data['dns_pref_' + rid]   = newrecord.priority
+    if newrecord.type == 'SRV':
+      data['dns_weight_' + rid] = newrecord.weight
+      data['dns_port_' + rid]   = newrecord.port
+    self._postDnsAction(newrecord, 'update', data)
 
   #----------------------------------------------------------------------------
   def deleteRecord(self, context, record):

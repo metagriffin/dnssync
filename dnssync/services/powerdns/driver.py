@@ -118,17 +118,17 @@ class Driver(api.Driver):
         _('could not add record {}/{}: {}', record.name, record.type, resp.description))
 
   #----------------------------------------------------------------------------
-  def updateRecord(self, context, record, oldrecord):
+  def updateRecord(self, context, record, newrecord):
 
     # PowerDNS does not seem to support absolute DNS names... ugh.
-    name    = reldom(record.name)
-    content = ' '.join([reldom(comp) for comp in record.content.split(' ')])
+    name    = reldom(newrecord.name)
+    content = ' '.join([reldom(comp) for comp in newrecord.content.split(' ')])
 
     resp = self.client.service.updateRecord(
-      oldrecord.id, name, record.type, content, record.ttl, record.priority or 0)
+      record.id, name, newrecord.type, content, newrecord.ttl, newrecord.priority or 0)
     if resp.code != 100:
       raise api.DriverError(
-        _('could not update record {}/{}: {}', record.name, record.type, resp.description))
+        _('could not update record {}/{}: {}', newrecord.name, newrecord.type, resp.description))
 
   #----------------------------------------------------------------------------
   def deleteRecord(self, context, record):
