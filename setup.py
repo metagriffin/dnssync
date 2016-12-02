@@ -41,7 +41,7 @@ test_dependencies = [
 dependencies = [
   'iniherit             >= 0.3.4',
   'dnspython            >= 1.11.1',
-  'six                  >= 1.6.1',
+  'six                  >= 1.10.0',
   'blessings            >= 1.5.1',
   'aadict               >= 0.2.2',
   'requests             >= 2.5.1',
@@ -53,6 +53,9 @@ dependencies = [
   #       https://bitbucket.org/jurko/suds
   'suds-jurko           >= 0.6',
   # 'suds                 >= 0.4',
+  'beautifulsoup4       >= 4.5.1',
+  'html5lib             >= 0.999999999',
+  'webencodings         >= 0.5',
 ]
 
 entrypoints = {
