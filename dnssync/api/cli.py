@@ -35,7 +35,7 @@ import asset
 from .i18n import _
 from . import engine
 from . import error
-from .util import evalenv
+from .util import evalenv, absdom, reldom
 
 #------------------------------------------------------------------------------
 
@@ -290,8 +290,10 @@ def main(args=None):
 
   options = cli.parse_args(args=args)
   params  = aadict(par.split('=', 1) for par in options.params)
-  params.driver = options.driver
-  params.domain = options.domain
+  # todo: copy over *all* options?...
+  params.driver   = options.driver or params.driver
+  params.domain   = options.domain or params.domain
+  params.zonefile = options.zonefile or params.zonefile
 
   if options.warranty:
     sys.stdout.write(WARRANTY)
@@ -324,11 +326,11 @@ def main(args=None):
         if match:
           options.config = os.path.join(
             os.path.dirname(options.zonefile), match.group(1))
-      if not options.domain:
+      if not params.domain:
         # todo: perhaps use dns.zone for this?...
         match = localorigin_cre.search(data)
         if match:
-          options.domain = params.domain = match.group(1)
+          params.domain = match.group(1)
 
   if options.config:
     config = configparser.SafeConfigParser()
@@ -337,19 +339,19 @@ def main(args=None):
     for section in ['DEFAULT'] + config.sections():
       for key, val in config.items(section):
         config.set(section, key, evalenv(val))
-    section = options.domain
+    section = params.domain
     if not section and config.has_option('DEFAULT', 'domain'):
       section = config.get('DEFAULT', 'domain')
     if not config.has_section(section):
-      section = 'DEFAULT'
-
-    # TODO: generalize this...
-    for attr in ('driver', 'apikey', 'domain', 'username', 'password'):
+      if config.has_section(absdom(section)):
+        section = absdom(section)
+      elif config.has_section(reldom(section)):
+        section = reldom(section)
+      else:
+        section = 'DEFAULT'
+    for attr in config.options(section):
       if params.get(attr) is None:
-        if config.has_option(section, attr):
-          params[attr] = config.get(section, attr)
-    # /TODO
-
+        params[attr] = config.get(section, attr)
     if not getattr(options, 'zonefile', None):
       if config.has_option(section, 'zonefile'):
         # TODO: make relative to config...
@@ -357,6 +359,9 @@ def main(args=None):
 
   if not params.driver:
     cli.error(_('required parameter "driver" not specified'))
+
+  # todo: why is this needed?...
+  options.domain = params.domain
 
   try:
     plugins = asset.plugins(SERVICES_PLUGINS, params.driver)
