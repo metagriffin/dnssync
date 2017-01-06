@@ -293,7 +293,7 @@ def main(args=None):
   # todo: copy over *all* options?...
   params.driver   = options.driver or params.driver
   params.domain   = options.domain or params.domain
-  params.zonefile = options.zonefile or params.zonefile
+  params.zonefile = getattr(options, 'zonefile', None) or params.zonefile
 
   if options.warranty:
     sys.stdout.write(WARRANTY)
@@ -349,7 +349,7 @@ def main(args=None):
         section = reldom(section)
       else:
         section = 'DEFAULT'
-    for attr in config.options(section):
+    for attr in config.options(section) if section != 'DEFAULT' else config.defaults().keys():
       if params.get(attr) is None:
         params[attr] = config.get(section, attr)
     if not getattr(options, 'zonefile', None):

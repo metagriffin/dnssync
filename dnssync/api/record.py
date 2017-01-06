@@ -59,7 +59,7 @@ class Record(object):
                name=None, ttl=None, rclass=None, type=None, content=None,
                priority=None, weight=None, port=None,
                *args, **kw):
-    super(Record, self).__init__(*args, **kw)
+    super(Record, self).__init__(*args)
     self.id       = id
     self.name     = name
     self.ttl      = ttl
@@ -69,6 +69,7 @@ class Record(object):
     self.weight   = weight
     self.port     = port
     self.content  = content
+    self.update(**kw)
 
   #----------------------------------------------------------------------------
   @staticmethod
