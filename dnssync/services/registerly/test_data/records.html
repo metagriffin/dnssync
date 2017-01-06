@@ -1,0 +1,977 @@
+<!-- dom:1--><!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" xml:lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Client Area - Register.ly</title>
+    <meta name="description" content="">
+    <meta name="author" content="LibyanSpider.com">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="//cdn.server.ly/registerly/css/style.css">
+    <script src="//cdn.server.ly/registerly/js/libs/modernizr-2.6.2.js"></script>
+
+    
+    <link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon" />
+    <link href='modules/servers/thesslstorefullv2/css/style.css' rel='stylesheet' type='text/css' />
+
+        
+    <style type="text/css">
+        li.login_in_menu {
+            display: none;
+        }
+    </style>
+    
+            <style>
+        
+        body { display : none;}
+
+        .client-table td:first-child strong {
+            display: inline;
+        }
+        table td > a {
+            float: none;
+            margin-right: auto;
+        }
+        
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+    
+    if (self == top) {
+        var theBody = document.getElementsByTagName('body')[0];
+        theBody.style.display = "block";
+    }
+    else {top.location = self.location;}
+    
+</script>
+<noscript>
+    <style>body{display:block;}</style>
+</noscript>
+<div class="layout client-area manage_dom">
+
+    <header>
+        <div class="container">
+            <div class="magic_dust"></div>
+            <a href="https://register.ly/" class='logo'>
+                <img src="//cdn.server.ly/registerly/images/logo.png" alt="Register.ly">
+                <!--span>
+                                        
+                </span-->
+            </a>
+            <div class="login_menu">
+                                <a>Hello <em>Name</em><span></span></a>
+                <div class="dropdown">
+                    <ul>
+                        <li><a href="clientarea.php?action=details">Edit Account Details</a></li>
+                                                <li><a href="clientarea.php?action=contacts">Contacts/Sub-Accounts</a></li>
+                        <li><a href="clientarea.php?action=addfunds">Add Funds</a></li>                        <li><a href="clientarea.php?action=emails">Email History</a></li>
+                                                    <li><a href="managesms.php">SMS Notifications Settings</a></li>
+                                                <li><a href="clientarea.php?action=changepw">Change Password</a></li>
+                    </ul>
+
+                    <a href="logout.php" class="btn yellow logout">Logout</a>
+
+                </div>
+                            </div>
+            <div class="menu">
+                <div class="left_back">
+                </div>
+
+                <div class="menu_nav">
+                    <ul class=""><li class=""><a href="http://register.ly">Home</a></li><li class=""><a href="http://register.ly/domains/">Domains</a></li><li class=""><a href="http://register.ly/reseller-program/">Reseller Program</a></li><li class=""><a href="http://register.ly/contact-us/">Contact us</a></li><li class="right login_in_menu"><a href="http://my.register.ly/clientarea.php">Login</a></li></ul>
+                </div>
+
+                <div class="right_log">
+                    
+                                        <a href="logout.php" class='logout' id='logout'>Logout</a>
+                    
+                    
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+
+    <div class="content">
+        <div class="container">
+            
+
+<style type="text/css">
+    
+    .btn[disabled=disabled], .btn:disabled, .btn[disabled=disabled]:hover, .btn:disabled:hover {
+        background-color:#EEEEEE;
+        color: #777777;
+        text-shadow: 0 1px 0 #efefef;
+        cursor: text;
+    }
+    
+</style>
+
+<div id="zones" class="main dns-wide">
+
+    <h3>Manage DNS</h3>
+
+        
+
+        
+    		<style type="text/css">
+		.chzn-container .chzn-results {
+			max-height: 250px;	
+		}
+		</style>
+        <section>
+            <!--h4>DNS Management</h4-->
+            <p>Edit zone - <strong>example.ly</strong></p>
+        </section>
+
+           <div class="showmax">
+   </div>
+            <form method="post" class="client-form">
+<input type="hidden" name="token" value="76d80f89e027100b49cc60391f7299ace7e58174" />
+                <input type="hidden" name="domainid" value="12345" >
+                <table class="client-table dns-table">
+                <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Content</th>
+                    <th>Priority</th>
+                    <th>TTL</th>
+                </tr>
+                </thead>
+                <tbody>
+            				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDA&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDA&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>example.ly</td>
+					<td>SOA</td>
+					<td>ns1.libyanspider.com support.libyanspider.com 0</td>
+					<td>&nbsp;</td>
+					<td>0</td>
+                    				</tr>
+                					<input type="hidden" name="record[IDB][rid]" value="IDB">
+					<input type="hidden" name="record[IDB][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDB&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDB&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDB][name]" value="*.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDB][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  SELECTED value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDB][content]" value="example.ly" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDB][ttl]" value="0">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDC][rid]" value="IDC">
+					<input type="hidden" name="record[IDC][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDC&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDC&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDC][name]" value="example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDC][type]" class="chzn-select">
+					                                    <option  SELECTED value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDC][content]" value="10.11.12.199" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDC][ttl]" value="0">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDD][rid]" value="IDD">
+					<input type="hidden" name="record[IDD][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDD&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDD&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDD][name]" value="example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDD][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  SELECTED value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDD][content]" value="mail.example.ly." class="middle">
+                    </td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDD][prio]" value=" 10">
+                    </td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDD][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDE][rid]" value="IDE">
+					<input type="hidden" name="record[IDE][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDE&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDE&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDE][name]" value="imap.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDE][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  SELECTED value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDE][content]" value="fh1.example.ly." class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDE][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDF][rid]" value="IDF">
+					<input type="hidden" name="record[IDF][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDF&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDF&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDF][name]" value="smtp.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDF][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  SELECTED value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDF][content]" value="fh1.example.ly." class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDF][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDG][rid]" value="IDG">
+					<input type="hidden" name="record[IDG][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDG&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDG&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDG][name]" value="mail.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDG][type]" class="chzn-select">
+					                                    <option  SELECTED value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDG][content]" value="10.11.12.247" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDG][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDH][rid]" value="IDH">
+					<input type="hidden" name="record[IDH][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDH&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDH&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDH][name]" value="example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDH][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  SELECTED value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDH][content]" value="ns1.libyanspider.com" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDH][ttl]" value="0">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDI][rid]" value="IDI">
+					<input type="hidden" name="record[IDI][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDI&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDI&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDI][name]" value="example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDI][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  SELECTED value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDI][content]" value="ns2.libyanspider.com" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDI][ttl]" value="0">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDJ][rid]" value="IDJ">
+					<input type="hidden" name="record[IDJ][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDJ&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDJ&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDJ][name]" value="example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDJ][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  SELECTED value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDJ][content]" value="ns3.libyanspider.com" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDJ][ttl]" value="0">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDK][rid]" value="IDK">
+					<input type="hidden" name="record[IDK][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDK&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDK&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDK][name]" value="example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDK][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  SELECTED value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDK][content]" value="ns4.libyanspider.com" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDK][ttl]" value="0">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDL][rid]" value="IDL">
+					<input type="hidden" name="record[IDL][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDL&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDL&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDL][name]" value="example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDL][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  SELECTED value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDL][content]" value="ns5.libyanspider.com" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDL][ttl]" value="0">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDM][rid]" value="IDM">
+					<input type="hidden" name="record[IDM][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDM&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDM&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDM][name]" value="example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDM][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  SELECTED value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDM][content]" value="ns6.libyanspider.com" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDM][ttl]" value="0">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDN][rid]" value="IDN">
+					<input type="hidden" name="record[IDN][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDN&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDN&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDN][name]" value="fh1.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDN][type]" class="chzn-select">
+					                                    <option  SELECTED value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDN][content]" value="10.11.12.134" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDN][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDO][rid]" value="IDO">
+					<input type="hidden" name="record[IDO][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDO&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDO&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDO][name]" value="fh2.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDO][type]" class="chzn-select">
+					                                    <option  SELECTED value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDO][content]" value="10.11.12.199" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDO][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDP][rid]" value="IDP">
+					<input type="hidden" name="record[IDP][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDP&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDP&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDP][name]" value="fh3.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDP][type]" class="chzn-select">
+					                                    <option  SELECTED value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDP][content]" value="10.11.12.237" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDP][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDQ][rid]" value="IDQ">
+					<input type="hidden" name="record[IDQ][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDQ&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDQ&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDQ][name]" value="demo.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDQ][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  SELECTED value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDQ][content]" value="prod.example.ly." class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDQ][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDR][rid]" value="IDR">
+					<input type="hidden" name="record[IDR][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDR&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDR&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDR][name]" value="chat.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDR][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  SELECTED value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDR][content]" value="fh1.example.ly." class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDR][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDS][rid]" value="IDS">
+					<input type="hidden" name="record[IDS][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDS&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDS&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDS][name]" value="localhost.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDS][type]" class="chzn-select">
+					                                    <option  SELECTED value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDS][content]" value="127.0.0.1" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDS][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDT][rid]" value="IDT">
+					<input type="hidden" name="record[IDT][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDT&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDT&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDT][name]" value="localhost.example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDT][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  SELECTED value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDT][content]" value="::1" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDT][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                					<input type="hidden" name="record[IDU][rid]" value="IDU">
+					<input type="hidden" name="record[IDU][zid]" value="4442">
+                    				<tr>
+									<td>
+
+
+                        <a href="/domaintools.php?id=IDU&amp;domain=4442&amp;ac=1&amp;domainid=12345">Edit</a>
+                        <a href="/domaintools.php?id=IDU&amp;domain=4442&amp;ac=2&amp;domainid=12345" class="iconfont-close"></a>
+
+                    </td>
+                    					<td>
+                        <input type="text" name="record[IDU][name]" value="example.ly" class="middle">
+                    </td>
+					<td class="chzn-small">
+					    <select name="record[IDU][type]" class="chzn-select">
+					                                    <option  value="A" >A</option>
+                                                            <option  value="AAAA" >AAAA</option>
+                                                            <option  value="CNAME" >CNAME</option>
+                                                            <option  value="MX" >MX</option>
+                                                            <option  value="NS" >NS</option>
+                                                            <option  SELECTED value="TXT" >TXT</option>
+                                                            <option  value="PTR" >PTR</option>
+                                                            <option  value="URL" >URL</option>
+                                                            <option  value="SRV" >SRV</option>
+                            					    </select>
+					</td>
+					<td>
+                        <input type="text" name="record[IDU][content]" value="v=spf1 a mx -all" class="middle">
+                    </td>
+                    					<td>&nbsp;</td>
+                                        <td>
+                        <input type="text" class="input-min" name="record[IDU][ttl]" value="14400">
+                    </td>
+                    				</tr>
+                                </tbody>
+            </table>
+                <ul class="btn-group btn-group-100">
+                    <li class="left"><a href="clientarea.php?action=domaindetails&amp;id=12345" class="btn btn-medium btn-black">Back to Domain Managment</a></li>
+                    <li class="right">
+                        <button type="reset" class="btn btn-medium btn-black">Reset Changes</button>
+                        <button type="submit" name="commit" class="btn btn-medium btn-home" >Commit Changes</button>
+                                                <a href="/domaintools.php?id=4442&amp;ac=3&amp;domainid=12345" class="btn btn-medium btn-home">Add Record</a>
+                                            </li>
+                </ul>
+
+
+           </form>
+            <form action="" method="post" name="googleAppsForm" id="googleAppsForm">
+<input type="hidden" name="token" value="76d80f89e027100b49cc60391f7299ace7e58174" />
+            <section>
+                <h4>Google Apps</h4>
+                <p>To add Google Apps records to this domain, click [Add Records] button. For instructions on how to verify please read our knowledge base article: <a href="http://register.ly/knowledgebase/verifying-google-apps-domain-ownership-using-txt-record/" target="_blank">Google Apps Domain Verification</a>.</p>
+            </section>
+
+                <!--input type="submit" name="addGoogleBtn" value="Add Google" style="display: none" /-->
+
+                <ul class="btn-group btn-group-100">
+                    <li class="left"><a href="clientarea.php?action=domaindetails&amp;id=12345" class="btn btn-medium btn-black">Back to Domain Managment</a></li>
+                    <li class="right"><button type="submit" name="google_records" class="btn btn-medium btn-black" >Add Records</button></li>
+                </ul>
+                <input type="hidden" name="addGoogle" value="1"  />            </form>
+            
+
+    
+ 
+
+
+
+ 
+
+</div>
+
+
+
+<div class="clearfix"></div>
+</div>
+</div>
+<div class='layout_footer'></div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-navigation">
+            <nav>
+                <ul class=""><li class=""><a href="http://register.ly">Home</a></li><li class=""><a href="http://register.ly/blog/">Blog</a></li><li class=""><a href="http://register.ly/about/">About</a></li><li class=""><a href="http://register.ly/statistics/">Statistics</a></li><li class=""><a href="http://register.ly/contact-us/">Contact us</a></li><li class=""><a href="http://register.ly/privacy-policy/">Privacy Policy</a></li><li class=""><a href="http://register.ly/terms/">Terms</a></li></ul>
+            </nav>
+            <p>&copy; 2017 <a href="http://libyanspider.com/">libyanspider.com</a>, All Rights Reserved.</p>
+        </div>
+        <div class='social'>
+            <ul>
+                <li><a href="#" class="facebook">Facebook</a></li>
+                <li><a href="#" class="twitter">Twitter</a></li>
+                <li><a href="http://register.ly/feed/" class="rss">RSS</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript at the bottom for fast page loading -->
+<script>
+	var jqLib = 'libs/jquery-1.7.1.min';
+	    
+    var require = {
+        paths: {
+            'jquery': jqLib,
+            'chosen': 'libs/chosen.jquery.min',
+            'collapsible': 'libs/jquery.collapsible.min',
+            'autosize': 'libs/jquery.autosize',
+            'uniform': 'libs/jquery.uniform',
+            'colorbox': 'libs/jquery.colorbox' },
+        shim: {
+             chosen: ['jquery'],collapsible: ['jquery'],autosize: ['jquery'],uniform: ['jquery'],  colorbox: ['jquery']              }
+    };
+    
+</script>
+<script src="//cdn.server.ly/registerly/js/require.js" data-main="//cdn.server.ly/registerly/js/default"></script>
+<script>
+    
+    define('global', {
+        themeURL: '{$cdn_url}',
+        ajaxURL: 'https://register.ly/ajaxed/',
+    });
+    
+</script>
+
+
+<script>
+    require(['https://my.register.ly/templates/registerls2/js/whmcs.min.js']);
+</script>
+
+<script>
+    
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-42697053-2', 'register.ly');
+    ga('send', 'pageview');
+    
+</script>
+
+<!-- Google Code for Register.ly Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 962711517;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "hFtsCPv0jl0Q3Z-HywM";
+var google_conversion_value = 1.00;
+var google_conversion_currency = "USD";
+var google_remarketing_only = false;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/962711517/?value=1.00&amp;currency_code=USD&amp;label=hFtsCPv0jl0Q3Z-HywM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+<!--[if lt IE 7 ]>
+<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+<![endif]-->
+</body>
+</html>

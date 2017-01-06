@@ -67,6 +67,7 @@ entrypoints = {
     'domainmonster      = dnssync.services.domainmonster:Driver',
     'powerdns           = dnssync.services.powerdns:Driver',
     'zoneedit           = dnssync.services.zoneedit:Driver',
+    'registerly         = dnssync.services.registerly:Driver',
   ],
 }
 
