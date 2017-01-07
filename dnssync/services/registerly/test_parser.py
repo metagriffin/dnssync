@@ -32,8 +32,7 @@ class TestParser(unittest.TestCase):
 
   maxDiff = None
 
-  # NOCI
-  ASSET_DATA_DIR = 'dnssync:dnssync/services/registerly/test_data/'
+  ASSET_DATA_DIR = 'dnssync:services/registerly/test_data/'
 
   #----------------------------------------------------------------------------
   def getData(self, name):
