@@ -64,6 +64,8 @@ def reg2api(record, name):
   if ret.type not in api.Record.TYPES:
     raise api.DriverError(
       _('unknown/unexpected Registerly record type: "{}"', ret.type))
+  if ret.type in (api.Record.TYPE_MX, api.Record.TYPE_CNAME, api.Record.TYPE_NS):
+    ret.update(content = absdom(ret.content))
   if ret.type == api.Record.TYPE_SOA:
     # there's stuff missing!... content form should be:
     #   {root} {contact} {serial} {refresh} {retry} {expire} {minttl}
@@ -72,7 +74,7 @@ def reg2api(record, name):
     # so fetching from DNS... ugh.
     return ret.update(content = regGetSoaContent(name))
   if ret.type == api.Record.TYPE_MX:
-    return ret.update(priority = record.prio, content = absdom(ret.content))
+    return ret.update(priority = record.prio)
   if ret.type == api.Record.TYPE_CNAME:
     return ret.update(content = absdom(ret.content))
   # TODO: verify api.Record.TYPE_SRV...
