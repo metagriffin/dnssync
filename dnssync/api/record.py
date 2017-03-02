@@ -35,9 +35,16 @@ def escapeContent(text):
   if not text:
     return text
   # todo: `dns.rdata._escapify` should really be doing this detection for me...
-  if ';' not in text and ' ' not in text and '"' not in text:
+  if ';' not in text and ' ' not in text and '"' not in text and len(text) <= 255:
     return text
-  return '"' + dns.rdata._escapify(text) + '"'
+  # todo: `dns.rdata._escapify` should really be doing this segmentation for me...
+  parts = []
+  while len(text) > 255:
+    parts.append(text[:255])
+    text = text[255:]
+  if text:
+    parts.append(text)
+  return '"' + '" "'.join([dns.rdata._escapify(part) for part in parts]) + '"'
 
 #------------------------------------------------------------------------------
 class Record(object):
