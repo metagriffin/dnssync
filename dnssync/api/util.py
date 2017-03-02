@@ -55,6 +55,8 @@ def absdom(domain):
   Returns a canonical version of the domain name `domain` using absolute
   domain name syntax (i.e. ending with a period).
   '''
+  if domain.startswith('*.'):
+    return '*.' + absdom(domain[2:])
   if not dnsname_re.match(domain):
     return domain
   domain = domain.lower()
