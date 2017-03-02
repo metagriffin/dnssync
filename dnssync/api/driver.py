@@ -23,6 +23,7 @@ import logging
 
 import dns.rdata
 import dns.zone
+from dns.exception import SyntaxError
 from aadict import aadict
 
 from .record import Record
@@ -91,7 +92,13 @@ class Driver(object):
     for record in self.getRecords(name):
       lines.append(record.toText())
     data = '\n'.join(lines)
-    return dns.zone.from_text(data, origin=name, relativize=False)
+    try:
+      return dns.zone.from_text(data, origin=name, relativize=False)
+    except SyntaxError as err:
+      log.exception(
+        'failed while trying to parse zonefile:\n  %s',
+        '\n  '.join(data.split('\n')))
+      raise
 
   #----------------------------------------------------------------------------
   def getRecords(self, name):
