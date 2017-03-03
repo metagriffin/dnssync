@@ -26,6 +26,7 @@ import dns.zone
 from dns.exception import SyntaxError
 from aadict import aadict
 
+from .i18n import _
 from .record import Record
 from . import error
 
