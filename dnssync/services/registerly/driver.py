@@ -27,6 +27,7 @@ import requests
 import asset
 import dns.resolver
 from six.moves import StringIO
+from six.moves.urllib import parse as urlparse
 import morph
 
 from dnssync import api
@@ -74,7 +75,7 @@ def reg2api(record, name):
     # so fetching from DNS... ugh.
     return ret.update(content = regGetSoaContent(name))
   if ret.type == api.Record.TYPE_MX:
-    return ret.update(priority = record.prio)
+    return ret.update(priority = int(record.prio))
   if ret.type == api.Record.TYPE_CNAME:
     return ret.update(content = absdom(ret.content))
   # TODO: verify api.Record.TYPE_SRV...
@@ -107,6 +108,18 @@ class Driver(api.Driver):
     return self._session
 
   #----------------------------------------------------------------------------
+  def urlget(self, url):
+    res = self.session.get(self.BASEURL + url)
+    res.raise_for_status()
+    return res
+
+  #----------------------------------------------------------------------------
+  def urlpost(self, url, data):
+    res = self.session.post(self.BASEURL + url, data=data)
+    res.raise_for_status()
+    return res
+
+  #----------------------------------------------------------------------------
   def _login(self):
     resp = self._session.get(self.BASEURL + '/clientarea.php')
     data = aadict(parser.extract_authdata(resp.text)).update({
@@ -125,12 +138,11 @@ class Driver(api.Driver):
 
   #----------------------------------------------------------------------------
   def _zones(self):
-    resp = self.session.get(self.BASEURL + '/clientarea.php?action=domains')
+    resp = self.urlget('/clientarea.php?action=domains')
     data = aadict(parser.extract_limitdata(resp.text)).update({
       'itemlimit' : 'all',
     })
-    resp = self.session.post(
-      self.BASEURL + '/clientarea.php?action=domains', data=dict(data))
+    resp = self.urlpost('/clientarea.php?action=domains', dict(data))
     return {
       did : absdom(domain)
       for did, domain in parser.extract_domains(resp.text).items()}
@@ -151,8 +163,71 @@ class Driver(api.Driver):
   def getRecords(self, name):
     name  = absdom(name)
     domid = self._getDomainID(name)
-    resp  = self.session.get(self.BASEURL + '/domaintools.php?domainid=' + domid)
-    return [reg2api(rec, name) for rec in parser.extract_records(resp.text)]
+    resp  = self.urlget('/domaintools.php?domainid=' + domid)
+    recs  = [reg2api(rec, name) for rec in parser.extract_records(resp.text)]
+    for page in parser.extract_pages(resp.text):
+      resp  = self.urlget('/domaintools.php?domainid=' + domid + '&start=' + str(page))
+      recs  += [reg2api(rec, name) for rec in parser.extract_records(resp.text)]
+    return recs
+
+  #----------------------------------------------------------------------------
+  def createRecord(self, context, record):
+    soa = [r for r in context.records if r.type == api.Record.TYPE_SOA][0]
+    params = urlparse.urlencode({
+      'id'        : soa.zid,
+      'domainid'  : soa.domainid,
+      'ac'        : '3',      ## 3 == CREATE
+    })
+    resp  = self.urlget('/domaintools.php?' + params)
+    token = parser.extract_formdata(resp.text)['token']
+    data  = {
+      'token'     : token,
+      'domain'    : soa.zid,
+      'name'      : reldom(record.name, to=context.name),
+      'ttl'       : record.ttl,
+      'type'      : record.type,
+      'content'   : record.content,
+      'commit'    : '',
+    }
+    if record.type in (api.Record.TYPE_MX, api.Record.TYPE_SRV):
+      data['prio'] = record.priority
+    resp = self.urlpost('/domaintools.php?' + params, data)
+
+  #----------------------------------------------------------------------------
+  def updateRecord(self, context, record, newrecord):
+    # TODO: registerly supports BATCH UPDATES! USE THAT!
+    params = urlparse.urlencode({
+      'domain'    : record.zid,
+      'domainid'  : record.domainid,
+      'id'        : record.rid,
+      'ac'        : '1',      ## 1 == UPDATE
+    })
+    resp  = self.urlget('/domaintools.php?' + params)
+    token = parser.extract_formdata(resp.text)['token']
+    data  = {
+      'token'     : token,
+      'zid'       : record.zid,
+      'rid'       : record.rid,
+      'name'      : reldom(record.name, to=context.name),
+      'ttl'       : newrecord.ttl,
+      'type'      : newrecord.type,
+      'content'   : newrecord.content,
+      'commit'    : '',
+    }
+    if record.type in (api.Record.TYPE_MX, api.Record.TYPE_SRV):
+      data['prio'] = newrecord.priority
+    resp = self.urlpost('/domaintools.php?' + params, data)
+
+  #----------------------------------------------------------------------------
+  def deleteRecord(self, context, record):
+    params = urlparse.urlencode({
+      'domain'    : record.zid,
+      'domainid'  : record.domainid,
+      'id'        : record.rid,
+      'ac'        : '2',      ## 2 == DELETE
+      'confirm'   : '1',
+    })
+    self.urlget('/domaintools.php?' + params)
 
 
 #------------------------------------------------------------------------------
