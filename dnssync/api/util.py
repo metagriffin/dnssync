@@ -65,11 +65,16 @@ def absdom(domain):
   return domain
 
 #------------------------------------------------------------------------------
-def reldom(domain):
+def reldom(domain, to=None):
   '''
   Returns a canonical version of the domain name `domain` using relative
   domain name syntax (i.e. not ending with a period).
   '''
+  if to is not None:
+    tmp = absdom(domain)
+    to = absdom(to)
+    if tmp.endswith('.' + to):
+      return tmp[:-1 - len(to)]
   if not dnsname_re.match(domain):
     return domain
   domain = domain.lower()
