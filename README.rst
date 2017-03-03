@@ -9,9 +9,10 @@ provider does not directly support that.
 
 Currently supported DNS service providers:
 
-* `DomainMonster <http://domainmonster.com/>`_
+* `DomainMonster <http://domainmonster.com/>`_ (via HTML scraping)
 * `PowerDNS <http://powerdns.net/>`_
-* `ZoneEdit <http://zoneedit.com/>`_
+* `ZoneEdit <http://zoneedit.com/>`_ (via HTML scraping)
+* `Register.LY <http://register.ly/>`_ (via HTML scraping)
 
 
 Project
