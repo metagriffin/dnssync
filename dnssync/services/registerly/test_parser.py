@@ -91,6 +91,11 @@ class TestParser(unittest.TestCase):
         {'rid': 'IDU', 'zid': '4442', 'domainid': '12345', 'type': 'TXT',     'name': 'example.ly',             'ttl': '14400', 'content': 'v=spf1 a mx -all',                                },
       ], key=lambda r: r['rid']))
 
+  #----------------------------------------------------------------------------
+  def test_extract_pages(self):
+    html = self.getData('records.html')
+    self.assertEqual(parser.extract_pages(html), [2, 3])
+
 
 #------------------------------------------------------------------------------
 # end of $Id$

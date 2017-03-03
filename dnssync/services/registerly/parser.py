@@ -56,6 +56,14 @@ def _extract_formdata(form):
   return data
 
 #------------------------------------------------------------------------------
+def extract_formdata(text):
+  data = dict()
+  soup = bs4.BeautifulSoup(text, 'html.parser')
+  for form in soup.select('form'):
+    data.update(_extract_formdata(form))
+  return data
+
+#------------------------------------------------------------------------------
 def extract_limitdata(text):
   data = dict()
   soup = bs4.BeautifulSoup(text, 'html.parser')
@@ -97,6 +105,14 @@ def extract_records(text):
         ttl       = str(rec.select('td:nth-of-type(6)')[0].string),
       ))
   return recs
+
+#------------------------------------------------------------------------------
+def extract_pages(text):
+  soup = bs4.BeautifulSoup(text, 'html.parser')
+  pages = []
+  for link in soup.select('div.showmax a'):
+    pages.append(int(link.string))
+  return sorted(pages)
 
 #------------------------------------------------------------------------------
 # end of $Id$
