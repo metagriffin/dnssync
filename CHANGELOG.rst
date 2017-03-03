@@ -3,6 +3,13 @@ ChangeLog
 =========
 
 
+v0.2.7
+======
+
+* Added Register.ly (via HTML scraping) support
+* Added long-content record support (i.e. > 255 characters)
+
+
 v0.2.6
 ======
 
