@@ -103,8 +103,7 @@ class Record(object):
     if ret.type == Record.TYPE_MX:
       ret.content = rdata[2].exchange.to_text()
     elif ret.type == Record.TYPE_TXT:
-      # todo: is this how they should all be done?...
-      ret.content = ' '.join(rdata[2].strings)
+      ret.content = ''.join(rdata[2].strings)
     return ret
 
   #----------------------------------------------------------------------------
